@@ -21,7 +21,9 @@ export default function Home() {
             <Button text="Démarrer" onClick={() => {}} />
         </Link>
       </div>
-      <p className="self-end mr-8 mb-8">Ratiscrum V2</p>
+      <Link href="https://www.ratiscrum.fr/" className='self-end'>
+        <p className="mr-8 mb-8 font-bold opacity-50">Ratiscrum V2 🐀</p>
+      </Link>
     </main>
   )
 }
