@@ -14,7 +14,8 @@ export default function Button({ text, onClick }: ButtonProps) {
             </button>
             <Image
                 src="arrow-narrow-right.svg"
-                alt="Arrow right"
+                alt="Arrow"
+                style={{ width: 20, height: 20 }}
                 width={20}
                 height={20}
             />

@@ -6,16 +6,22 @@ import Link from 'next/link';
 import ProgressBar from '../components/ProgressBar';
 import Card from '../components/Card';
 import Choice from '../components/Choice';
+import TinderCard from 'react-tinder-card'
 
 export default function Page() {
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(0);
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
 
+  const onSwipe = (direction: any) => {
+    console.log("Swipe: " + direction);
+  }
+
   useEffect(() => {
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     // Cleanup function to remove the event listener
@@ -25,11 +31,12 @@ export default function Page() {
   return (
     <main className='flex flex-col m-10 gap-4 lg:gap-10'>
         <div className='flex flex-col lg:flex-row max-lg:gap-4 max-lg:items-center'>
-            <Link href="/">
+            <Link href="/" className='hover:bg-hoverColor cursor-pointer p-2 rounded-lg'>
                 <Image src="/ratisexe_logo.svg"
                     alt="Ratisexe Logo"
-                    width={160}
-                    height={50}>        
+                    style={{ width: 140, height: 40 }}
+                    width={140}
+                    height={40}>        
                 </Image>
             </Link>
             <div className='flex flex-col grow justify-center lg:flex-row  gap-4 lg:gap-6 items-center'>
@@ -47,7 +54,11 @@ export default function Page() {
         <div className="self-center flex flex-row items-center gap-10">
           <Choice text="REFUSER" img="/left-arrow.svg" />
           <div>
-            <Card img="/preservatifs.jpg" text="Quel est le meilleur moyen de se protéger des IST ?" />
+            <TinderCard onSwipe={onSwipe} preventSwipe={['up', 'down']}    
+                swipeRequirementType="position"
+                swipeThreshold={window.innerWidth * 0.15}>
+              <Card img="/preservatifs.jpg" text="Quel est le meilleur moyen de se protéger des IST ?" />
+            </TinderCard>
           </div>
           <Choice text="ACCEPTER" img="/right-arrow.svg"/>
         </div>

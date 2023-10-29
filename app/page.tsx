@@ -10,8 +10,8 @@ export default function Home() {
       <Image className="self-end mr-8 mt-8" src="/music-note.svg" alt="Music note" width={30} height={30} />
       <div className="flex flex-col items-center justify-center gap-y-8">
       <div className="w-2/3 md:w-1/4">
-          <Image 
-          src="/ratisexe_logo.svg" alt="RatiseXe Logo" width={400} height={130} layout="responsive" />
+          <Image style={{ width: 'auto', height: 'auto' }}
+            src="/ratisexe_logo.svg" alt="RatiseXe Logo" width={400} height={130} priority/>
         </div>
        
         <p className="font-bold sm:w-1/2 md:w-2/6 p-2 text-center">
