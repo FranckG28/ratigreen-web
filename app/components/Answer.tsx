@@ -39,7 +39,7 @@ export default function Answer({img, question, choice}: ResultProps) {
             <div className='mt-2 flex gap-4'>
               <p className='font-bold text-2xl'>65%</p>
               <div className='w-full'>
-                <ProgressBar color="progressBlue" value={65} />
+                <ProgressBar value={65} />
               </div>
             </div>
           </div>

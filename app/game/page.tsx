@@ -31,8 +31,8 @@ export default function Game() {
                 </Image>
             </Link>
             <div className='flex flex-col grow justify-center lg:flex-row  gap-4 lg:gap-6 items-center'>
-                <IndicatorProgress icon="/coins-hand.svg" color="progressBlue" value={50} />
-                <IndicatorProgress icon="/activity-heart.svg" color="yellowColor" value={50} />
+                <IndicatorProgress icon="/coins-hand.svg" color="progressBlue" value={75} />
+                <IndicatorProgress icon="/activity-heart.svg" color="yellowColor" value={30} />
                 <IndicatorProgress icon="/face-happy.svg" color="progressBlue" value={50} />
             </div>
             <div className='max-xl:hidden' style={{width: '160px'}}></div> {/* To center my grow dir */}

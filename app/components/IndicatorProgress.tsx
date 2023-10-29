@@ -14,7 +14,7 @@ export default function IndicatorProgress({ icon, color, value }: IndicatorProgr
         <div className="flex flex-row gap-2">
             <Image src={icon} alt="Icon" width={30} height={30} style={{ width: 30, height: 30 }}/>
             <div className='w-48 h-8'>
-                <ProgressBar color={color} value={value} />
+                <ProgressBar value={value} />
             </div>
         </div>
     </div>

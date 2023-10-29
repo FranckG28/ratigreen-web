@@ -1,7 +1,6 @@
 import React from 'react'
 
 interface ProgressBarProps {
-    color: string;
     value: number;
 }
 
@@ -13,10 +12,12 @@ const colorClasses: { [key: string]: string } = {
     yellowColor: 'bg-yellowColor',
 }
 
-export default function ProgressBar({ color, value }: ProgressBarProps) {
+export default function ProgressBar({ value }: ProgressBarProps) {
+  const colorClass = value < 50 ? 'bg-yellowColor' : 'bg-progressBlue';
+
   return (
     <div className={"border-4 rounded-full p-2"} style={{ borderColor: 'rgba(255, 255, 255, 0.3)' }}>
-      <div className={`h-2 ${colorClasses[color]} rounded-full`} style={{ width: `${value}%` }}></div>
+      <div className={`h-2 ${colorClass} rounded-full`} style={{ width: `${value}%` }}></div>
     </div>
   )
 }
