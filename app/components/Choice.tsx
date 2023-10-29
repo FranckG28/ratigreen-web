@@ -4,13 +4,14 @@ import Image from 'next/image';
 export interface ChoiceProps {
     text: string;
     img: string;
+    click: () => void;
 }
 
-export default function Choice({ text, img }: ChoiceProps) {
+export default function Choice({ text, img, click }: ChoiceProps) {
   return (
-    <div className='flex flex-col gap-4 items-center rounded-lg p-4 hover:bg-hoverColor cursor-pointer'>
+    <div onClick={click} className='flex flex-col gap-4 items-center rounded-lg p-4 hover:bg-hoverColor cursor-pointer'>
         <Image src={img} alt="Arrow" width={60} height={60} style={{width: 60, height: 60}}></Image>
-        <p className='text-lg font-bold text-center opacity-50'>{text}</p>
+        <p className='text-lg font-bold text-center opacity-50 w-40'>{text}</p>
     </div>
   )
 }

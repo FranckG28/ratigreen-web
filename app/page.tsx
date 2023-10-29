@@ -17,7 +17,7 @@ export default function Home() {
         <p className="font-bold sm:w-1/2 md:w-2/6 p-2 text-center">
           Le jeu pour parfaire votre education sexuelle. Faites les meilleurs choix afin de continuer l&apos;aventure le plus longtemps possible !
         </p>
-        <Link href="/question">
+        <Link href="/game">
             <Button text="Démarrer" onClick={() => {}} />
         </Link>
       </div>
