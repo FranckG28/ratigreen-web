@@ -8,7 +8,7 @@ interface ButtonProps {
 
 export default function Button({ text, onClick }: ButtonProps) {
     return (
-        <div className='flex flex-row bg-yellowColor rounded-full px-5 py-2 gap-2 shadow-yellowColor transition ease-in-out hover:shadow-buttonHoverColor hover:scale-110'>
+        <div className='flex flex-row items-center bg-yellowColor rounded-full px-5 py-2 gap-2 shadow-yellowColor transition ease-in-out hover:shadow-buttonHoverColor hover:scale-110'>
             <button onClick={onClick} className=" text-black font-bold">
                 {text}
             </button>
