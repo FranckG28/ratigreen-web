@@ -23,6 +23,7 @@ const config: Config = {
       boxShadow: {
         yellowColor: '0px 0px 25px 0.5px #F3CC31',
         buttonHoverColor: '0px 1px 30px 2px #F3CC31',
+        pinkCardShadow: "0px 56px 100px 40px #e779c13b"
       },
     },
   },
