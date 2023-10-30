@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Run `npx prisma format` after making changes to this file
+// Run `npx prisma migrate dev --name <name>` : to create a migration
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Question {
+  id      Int      @id @default(autoincrement())
+  title   String
+  choices Choice[]
+  answer  String
+}
+
+// enum Indicator {
+//   HEALTH
+//   ENJOYMENT
+//   MONEY
+// }
+
+model Indicator {
+  id                   Int                    @id @default(autoincrement())
+  title                String                 @unique
+  IndicatorCoefficient IndicatorCoefficient[]
+}
+
+model Choice {
+  id                     Int                  @id @default(autoincrement())
+  text                   String
+  indicatorCoefficient   IndicatorCoefficient @relation(fields: [indicatorCoefficientId], references: [id])
+  question               Question             @relation(fields: [questionId], references: [id])
+  questionId             Int
+  indicatorCoefficientId Int
+}
+
+model IndicatorCoefficient {
+  id          Int       @id @default(autoincrement())
+  indicator   Indicator @relation(fields: [indicatorId], references: [id])
+  indicatorId Int
+  coefficient Float
+  Choice      Choice[]
+}
