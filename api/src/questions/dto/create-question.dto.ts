@@ -1,33 +1,25 @@
-import { IsString, IsNotEmpty, IsArray, ValidateNested } from 'class-validator';
+// CreateQuestionDto.ts
+import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-
-class CreateChoiceDto {
-  @IsString()
-  @IsNotEmpty()
-  text: string;
-
-  @IsNotEmpty()
-  indicatorCoefficientId: number;
-}
+import { CreateChoiceDto } from './create-choice.dto';
 
 /**
  * The CreateQuestionDto class is used to validate the data that will be used to create a new question.
  */
 export class CreateQuestionDto {
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   title: string;
 
   /**
    * The choices property should be an array of CreateChoiceDto instances,
    * and each of these instances should be validated according to the rules defined in the CreateChoiceDto class
    */
-  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateChoiceDto)
   choices: CreateChoiceDto[];
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   answer: string;
 }

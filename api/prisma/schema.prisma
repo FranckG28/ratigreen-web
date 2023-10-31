@@ -3,10 +3,12 @@
 
 // Run `npx prisma format` after making changes to this file
 // Run `npx prisma migrate dev --name <name>` : to create a migration
+// npx prisma migrate reset : to reset the database
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  
 }
 
 generator client {
@@ -29,15 +31,15 @@ enum Indicator {
 model Choice {
   id                     Int                  @id @default(autoincrement())
   text                   String
-  indicatorCoefficient   IndicatorCoefficient @relation(fields: [indicatorCoefficientId], references: [id])
   question               Question             @relation(fields: [questionId], references: [id])
   questionId             Int
-  indicatorCoefficientId Int
+  indicatorCoefficients  IndicatorCoefficient[]
 }
 
 model IndicatorCoefficient {
   id          Int       @id @default(autoincrement())
   indicator   Indicator
   coefficient Float
-  Choice      Choice[]
+  choiceId    Int
+  choice      Choice    @relation(fields: [choiceId], references: [id])
 }

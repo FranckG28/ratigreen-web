@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
@@ -8,17 +8,34 @@ export class QuestionsService {
   constructor(private prisma: PrismaService) {}
 
   async createQuestion(data: CreateQuestionDto) {
-    const { choices, ...questionData } = data;
+    if (!data.choices || data.choices.length !== 2) {
+      throw new BadRequestException('A question must have exactly 2 choices');
+    }
 
     return this.prisma.question.create({
       data: {
-        ...questionData,
+        title: data.title,
+        answer: data.answer,
         choices: {
-          create: choices,
+          create: data.choices.map((choice) => ({
+            text: choice.text,
+            indicatorCoefficients: {
+              create: choice.indicatorCoefficients.map(
+                (indicatorCoefficient) => ({
+                  indicator: indicatorCoefficient.indicator,
+                  coefficient: indicatorCoefficient.coefficient,
+                }),
+              ),
+            },
+          })),
         },
       },
       include: {
-        choices: true,
+        choices: {
+          include: {
+            indicatorCoefficients: true,
+          },
+        },
       },
     });
   }
@@ -26,16 +43,29 @@ export class QuestionsService {
   async getQuestions() {
     return this.prisma.question.findMany({
       include: {
-        choices: true,
+        choices: {
+          include: {
+            indicatorCoefficients: true,
+          },
+        },
       },
     });
   }
 
+  /**
+   * Get a question by id
+   * @param id The id of the question
+   * @returns A Question entity with its choices and indicator coefficients
+   */
   async getQuestion(id: number) {
     return this.prisma.question.findUnique({
       where: { id },
       include: {
-        choices: true,
+        choices: {
+          include: {
+            indicatorCoefficients: true,
+          },
+        },
       },
     });
   }
@@ -51,6 +81,20 @@ export class QuestionsService {
   }
 
   async deleteQuestion(id: number) {
+    await this.prisma.indicatorCoefficient.deleteMany({
+      where: {
+        choice: {
+          questionId: id,
+        },
+      },
+    });
+
+    await this.prisma.choice.deleteMany({
+      where: {
+        questionId: id,
+      },
+    });
+
     return this.prisma.question.delete({
       where: { id },
     });
