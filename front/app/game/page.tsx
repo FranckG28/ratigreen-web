@@ -1,22 +1,59 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import IndicatorProgress from '../components/IndicatorProgress';
-import Question from '../components/Question';
 import Answer from '../components/Answer';
+import { GET } from './api';
+import { Question as QuestionModel } from '../models/question';
+import Question from '../components/Question';
+import { Choice } from '../models/choice';
+import { Indicator } from '../models/indicator';
 
 export default function Game() {
 
+  const [moneyProgress, setMoneyProgress] = useState(50);
+  const [enjoymentProgress, setEnjoymentProgress] = useState(50);
+  const [happyProgress, setHappyProgress] = useState(50);
+  
+  const [questions, setQuestions] = useState<QuestionModel[] | null>(null);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      const result = await GET();
+      console.log(result);
+      setQuestions(result);
+    };
+
+    fetchQuestions();
+  }, []);
+
   const [isResultPage, setIsResultPage] = useState(false); 
 
-  const [choice, setChoice] = useState(''); // ['left', 'right']
+  const [choice, setChoice] = useState<Choice>(); 
+  const [indicator, setIndicator] = useState();
 
-  const onChoice = (choice: any) => {
-    console.log("Choice: " + choice);
+  const onChoice = (choice: Choice) => {
     setIsResultPage(true);
     setChoice(choice);
+
+    // Update progress values based on choice
+    choice.indicatorCoefficients.forEach((ic) => {
+      switch (ic.indicator) {
+        case Indicator.MONEY:
+          setMoneyProgress(prev => prev + ic.coefficient);
+          break;
+        case Indicator.ENJOYMENT:
+          setEnjoymentProgress(prev => prev + ic.coefficient);
+          break;
+        case Indicator.HAPPY:
+          setHappyProgress(prev => prev + ic.coefficient);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   return (
@@ -31,24 +68,26 @@ export default function Game() {
                 </Image>
             </Link>
             <div className='flex flex-col grow justify-center lg:flex-row  gap-4 lg:gap-6 items-center'>
-                <IndicatorProgress icon="/coins-hand.svg" color="progressBlue" value={75} />
-                <IndicatorProgress icon="/activity-heart.svg" color="yellowColor" value={30} />
-                <IndicatorProgress icon="/face-happy.svg" color="progressBlue" value={50} />
+              <IndicatorProgress icon="/coins-hand.svg" color="progressBlue" value={moneyProgress} />
+              <IndicatorProgress icon="/activity-heart.svg" color="yellowColor" value={enjoymentProgress} />
+              <IndicatorProgress icon="/face-happy.svg" color="progressBlue" value={happyProgress} />
             </div>
             <div className='max-xl:hidden' style={{width: '160px'}}></div> {/* To center my grow dir */}
         </div>
         <p className='bg-pinkColor w-24 h-30 rounded-full p-2 text-center font-bold self-center'>JOUR 1</p>
 
 
-        {isResultPage 
-            ? ( <Answer choice={choice} img="/preservatifs.jpg" question='Nous avons pas de préservatif, que faire?' /> 
-            ) : (<Question 
+        {questions 
+          ? (isResultPage 
+            ? <Answer choice={choice!} img="/preservatifs.jpg" question={questions[0]} /> 
+            : <Question 
                 img="/preservatifs.jpg" 
-                question='Nous avons pas de préservatif, que faire?' 
-                leftChoice='Je luis dis de pratiquer une pénétration anale'
-                rightChoice="Nous utilisons nos mains pour nous donner du plaisir réciproque"
+                question={questions[0].title}
+                leftChoice={questions[0].choices[0]}
+                rightChoice={questions[0].choices[1]}
                 onChoice={onChoice} />
             )
+          : <p>Loading...</p>
         }
     </main>
   )

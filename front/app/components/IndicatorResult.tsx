@@ -4,7 +4,7 @@ import Image from 'next/image'
 export interface IndicatorResultProps {
     img: string,
     symbol: string,
-    value: string
+    value: number
 }
 
 export default function IndicatorResult({img, symbol, value}: IndicatorResultProps) {

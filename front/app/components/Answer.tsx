@@ -3,12 +3,29 @@ import Image from 'next/image';
 import Button from './Button';
 import IndicatorResult from './IndicatorResult';
 import ProgressBar from './ProgressBar';
+import { Question } from '../models/question';
+import { Choice } from '../models/choice';
+import { Indicator } from '../models/indicator';
 
 export interface ResultProps {
     img: string;
-    question: string;
-    choice: string;
+    question: Question;
+    choice: Choice;
 }
+
+function getIndicatorImage(indicator: Indicator): string {
+  switch (indicator) {
+    case Indicator.MONEY:
+      return "/coins-hand.svg";
+    case Indicator.ENJOYMENT:
+      return "/activity-heart.svg";
+    case Indicator.HAPPY:
+      return "/face-happy.svg";
+    default:
+      return ""; // return a default image or an empty string
+  }
+}
+
 
 export default function Answer({img, question, choice}: ResultProps) {
   return (
@@ -19,20 +36,25 @@ export default function Answer({img, question, choice}: ResultProps) {
           <div className='flex flex-col bg-white rounded-xl justify-center shadow-pinkCardShadow'>
             <div className='flex flex-row gap-10 items-center grow justify-center p-10'>
                 <Image style={{pointerEvents : 'none', userSelect: 'none', width: 'auto', height: 'auto'}} src={img} alt="Hey" width={100} height={100}  ></Image>
-                <p className='text-primaryColor text-lg font-bold text-center select-none'>{question}</p>
+                <p className='text-primaryColor text-lg font-bold text-center select-none'>{question.title}</p>
             </div>
           </div>
           <div>
             <h2 className='opacity-60 font-bold text-lg uppercase'>Vous avez choisis</h2>
-            <p className='font-bold text-1xl'>{choice}</p>
+            <p className='font-bold text-1xl'>{choice.text}</p>
           </div>
           <div>
             <h2 className='opacity-60 font-bold text-lg uppercase'>Effets sur vos indicateurs</h2>
             <div className='mt-2 flex gap-12'>
-              <IndicatorResult img="/coins-hand.svg" symbol="+" value="10" />
-              <IndicatorResult img="/activity-heart.svg" symbol="-" value="2" />
-              <IndicatorResult img="/face-happy.svg" symbol="+" value="4" />
-            </div>
+            {choice.indicatorCoefficients.map((ic) => (
+              <IndicatorResult 
+                key={ic.indicator}
+                img={getIndicatorImage(ic.indicator)} 
+                symbol={ic.coefficient > 0 ? "+" : "-"} 
+                value={Math.abs(ic.coefficient)} 
+              />
+            ))}
+      </div>
           </div>
           <div>
             <h2 className='opacity-60 font-bold text-lg uppercase'>Ce que les autres ont choisis</h2>
@@ -49,7 +71,7 @@ export default function Answer({img, question, choice}: ResultProps) {
           <h1 className='opacity-60 font-bold text-2xl uppercase'>Commentaires</h1>
           <div className='flex flex-col bg-white rounded-xl h-3/4 justify-center shadow-pinkCardShadow'>
             <div className='flex flex-row gap-10 items-center grow justify-center'>
-                <p className='text-primaryColor text-lg font-bold text-center p-10'>Les pénétrations anales ne sont pas sans risque pour les IST. Néamoins la masturbation avec vos mains entraine un risque très minime.</p>
+                <p className='text-primaryColor text-lg font-bold text-center p-10'>{question.answer}</p>
             </div>
           </div>
           <div className='self-end'>

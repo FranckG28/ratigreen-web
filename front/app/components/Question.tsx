@@ -4,16 +4,20 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card';
 import Choice from './Choice';
 import TinderCard from 'react-tinder-card'
+import { Choice as ChoiceModel } from '../models/choice';
 
 export interface QuestionProps {
     img: string;
     question: string;
-    leftChoice: string;
-    rightChoice: string;
-    onChoice: (choice: any) => void
+    leftChoice: ChoiceModel;
+    rightChoice: ChoiceModel;
+    onChoice: (choice: ChoiceModel) => void
 }
 
 export default function Question({ img, question, leftChoice, rightChoice, onChoice }: QuestionProps) {
+
+  const LEFT_SWIPE = "left";
+  const RIGHT_SWIPE = "right";
 
   const [windowWidth, setWindowWidth] = useState(0);
 
@@ -22,8 +26,8 @@ export default function Question({ img, question, leftChoice, rightChoice, onCho
   };
 
   const onSwipe = (direction: any) => {
-    console.log("Swipe: " + direction);
-    onChoice(direction);
+    if(direction === LEFT_SWIPE) onChoice(leftChoice);
+    else if(direction === RIGHT_SWIPE) onChoice(rightChoice); 
   }
 
   useEffect(() => {
@@ -39,7 +43,7 @@ export default function Question({ img, question, leftChoice, rightChoice, onCho
         {windowWidth > 768 ? ( 
             // Render layout for screens larger than 1024px
         <div className="self-center flex flex-row items-center gap-10">
-          <Choice text={leftChoice} img="/left-arrow.svg" click={() => onChoice("left")}/>
+          <Choice text={leftChoice.text} img="/left-arrow.svg" click={() => onChoice(leftChoice)}/>
           <div>
             <TinderCard onSwipe={onSwipe} preventSwipe={['up', 'down']}    
                 swipeRequirementType="position"
@@ -47,14 +51,14 @@ export default function Question({ img, question, leftChoice, rightChoice, onCho
               <Card img={img} text={question} />
             </TinderCard>
           </div>
-          <Choice text={rightChoice} click={() => onChoice("right")} img="/right-arrow.svg"/>
+          <Choice text={rightChoice.text} click={() => onChoice(rightChoice)} img="/right-arrow.svg"/>
         </div>
       ) : (
         // Render layout for screens smaller or equal to 1024px
         <div className="self-center flex flex-col items-center gap-4">
           <div className='flex justify-around'>
-            <Choice text={leftChoice} click={() => onChoice("left")} img="/left-arrow.svg" />
-            <Choice text={rightChoice} click={() => onChoice("right")} img="/right-arrow.svg" />
+            <Choice text={leftChoice.text} click={() => onChoice(leftChoice)} img="/left-arrow.svg" />
+            <Choice text={rightChoice.text} click={() => onChoice(rightChoice)} img="/right-arrow.svg" />
           </div>
           <div draggable="true">
             <Card img={img} text={question} />
