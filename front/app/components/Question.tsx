@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
 import Choice from './Choice';
-import TinderCard from 'react-tinder-card'
+import TinderCard from '../lib/index'
 import { Choice as ChoiceModel } from '../models/choice';
 
 export interface QuestionProps {
@@ -26,6 +26,7 @@ export default function Question({ img, question, leftChoice, rightChoice, onCho
   };
 
   const onSwipe = (direction: any) => {
+    console.log(direction);
     if(direction === LEFT_SWIPE) onChoice(leftChoice);
     else if(direction === RIGHT_SWIPE) onChoice(rightChoice); 
   }
@@ -45,7 +46,7 @@ export default function Question({ img, question, leftChoice, rightChoice, onCho
         <div className="self-center flex flex-row items-center gap-10">
           <Choice text={leftChoice.text} img="/left-arrow.svg" click={() => onChoice(leftChoice)}/>
           <div>
-            <TinderCard onSwipe={onSwipe} preventSwipe={['up', 'down']}    
+            <TinderCard onSwipe={(direction) => {onSwipe(direction)}} preventSwipe={['up', 'down']}    
                 swipeRequirementType="position"
                 swipeThreshold={window.innerWidth * 0.15}>
               <Card img={img} text={question} />
