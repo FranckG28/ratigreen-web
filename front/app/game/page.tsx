@@ -16,13 +16,24 @@ export default function Game() {
   const [moneyProgress, setMoneyProgress] = useState(50);
   const [enjoymentProgress, setEnjoymentProgress] = useState(50);
   const [happyProgress, setHappyProgress] = useState(50);
+  const [day, setDay] = useState(1);
   
+  const [actualQuestion, setActualQuestion] = useState<QuestionModel | null>(null);
   const [questions, setQuestions] = useState<QuestionModel[] | null>(null);
+
+  const nextQuestion = () => {
+    setActualQuestion(questions![day]);
+    setDay(prev => prev + 1);
+    setIsResultPage(false);
+  }
 
   useEffect(() => {
     const fetchQuestions = async () => {
       const result = await GET();
+      // randomize questions order
+      result.sort(() => Math.random() - 0.5);
       console.log(result);
+      setActualQuestion(result[0]);
       setQuestions(result);
     };
 
@@ -32,7 +43,6 @@ export default function Game() {
   const [isResultPage, setIsResultPage] = useState(false); 
 
   const [choice, setChoice] = useState<Choice>(); 
-  const [indicator, setIndicator] = useState();
 
   const onChoice = (choice: Choice) => {
     setIsResultPage(true);
@@ -74,17 +84,17 @@ export default function Game() {
             </div>
             <div className='max-xl:hidden' style={{width: '160px'}}></div> {/* To center my grow dir */}
         </div>
-        <p className='bg-pinkColor w-24 h-30 rounded-full p-2 text-center font-bold self-center'>JOUR 1</p>
+        <p className='bg-pinkColor w-24 h-30 rounded-full p-2 text-center font-bold self-center'>JOUR {day}</p>
 
 
-        {questions 
+        {actualQuestion && questions 
           ? (isResultPage 
-            ? <Answer choice={choice!} img="/preservatifs.jpg" question={questions[0]} /> 
+            ? <Answer choice={choice!} img="/preservatifs.jpg" question={actualQuestion} nextQuestion={nextQuestion} /> 
             : <Question 
                 img="/preservatifs.jpg" 
-                question={questions[0].title}
-                leftChoice={questions[0].choices[0]}
-                rightChoice={questions[0].choices[1]}
+                question={actualQuestion!.title}
+                leftChoice={actualQuestion.choices[0]}
+                rightChoice={actualQuestion.choices[1]}
                 onChoice={onChoice} />
             )
           : <p>Loading...</p>

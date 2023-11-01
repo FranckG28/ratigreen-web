@@ -11,6 +11,7 @@ export interface ResultProps {
     img: string;
     question: Question;
     choice: Choice;
+    nextQuestion: () => void
 }
 
 function getIndicatorImage(indicator: Indicator): string {
@@ -27,7 +28,7 @@ function getIndicatorImage(indicator: Indicator): string {
 }
 
 
-export default function Answer({img, question, choice}: ResultProps) {
+export default function Answer({img, question, choice, nextQuestion}: ResultProps) {
   return (
     <div className='flex lg:flex-row flex-col lg:gap-28 gap-10'>
 
@@ -75,7 +76,7 @@ export default function Answer({img, question, choice}: ResultProps) {
             </div>
           </div>
           <div className='self-end'>
-            <Button text="Tour suivant" onClick={() => {}} />
+              <Button text="Tour suivant" onClick={nextQuestion} />
           </div>
         </div>
     </div>

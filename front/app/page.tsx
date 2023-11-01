@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import Button from './components/Button'
 import Link from 'next/link'
@@ -17,9 +15,7 @@ export default function Home() {
         <p className="font-bold sm:w-1/2 md:w-2/6 p-2 text-center">
           Le jeu pour parfaire votre education sexuelle. Faites les meilleurs choix afin de continuer l&apos;aventure le plus longtemps possible !
         </p>
-        <Link href="/game">
-            <Button text="Démarrer" onClick={() => {}} />
-        </Link>
+        <Button href="/game" text="Démarrer" />
       </div>
       <Link href="https://www.ratiscrum.fr/" className='self-end'>
         <p className="mr-8 mb-8 font-bold opacity-50">Ratiscrum V2 🐀</p>
