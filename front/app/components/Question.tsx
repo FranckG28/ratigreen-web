@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
 import Choice from './Choice';
-import TinderCard from '../lib/index'
+import TinderCard from 'react-tinder-card'
 import { Choice as ChoiceModel } from '../models/choice';
 
 export interface QuestionProps {
@@ -26,7 +26,6 @@ export default function Question({ img, question, leftChoice, rightChoice, onCho
   };
 
   const onSwipe = (direction: any) => {
-    console.log(direction);
     if(direction === LEFT_SWIPE) onChoice(leftChoice);
     else if(direction === RIGHT_SWIPE) onChoice(rightChoice); 
   }
