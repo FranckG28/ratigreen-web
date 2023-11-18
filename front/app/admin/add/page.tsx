@@ -1,70 +1,12 @@
-import { revalidatePath } from 'next/cache';
+import { addQuestionAction } from '@/app/actions/add-question.action';
 import React from 'react'
 
 export default function CreateQuestion() {
 
-  const addQuestion = async (formData: FormData) => {
-    "use server";
-
-    const question = {
-      title: formData.get('question'),
-      answer: formData.get('answer'),
-      choices: [
-        {
-          text: formData.get('choices[0].text'),
-          indicatorCoefficients: [
-            {
-              indicator: 'HAPPY',
-              coefficient: Number(formData.get('choices[0].indicator[0]'))
-            },
-            {
-              indicator: 'ENJOYMENT',
-              coefficient: Number(formData.get('choices[0].indicator[1]'))
-            },
-            {
-              indicator: 'MONEY',
-              coefficient: Number(formData.get('choices[0].indicator[2]'))
-            }
-          ]
-        },
-        {
-          text: formData.get('choices[1].text'),
-          indicatorCoefficients: [
-            {
-              indicator: 'HAPPY',
-              coefficient: Number(formData.get('choices[1].indicator[0]'))
-            },
-            {
-              indicator: 'ENJOYMENT',
-              coefficient: Number(formData.get('choices[1].indicator[1]'))
-            },
-            {
-              indicator: 'MONEY',
-              coefficient: Number(formData.get('choices[1].indicator[2]'))
-            }
-          ]
-        }
-      ]
-    };
-
-    console.log(JSON.stringify(question));
-
-    await fetch('http://localhost:3000/api/questions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(question),
-    });
-
-    // Revalidate cache when we will refresh the page /admin
-    revalidatePath('/admin');
-  }
-
   return (
     <div className='m-10'>
       <h1 className="text-2xl font-bold opacity-80">Create question</h1>
-      <form className="flex flex-col gap-5" action={addQuestion}>
+      <form className="flex flex-col gap-5" action={addQuestionAction}>
         <div>
           <label className="block text-sm font-medium text-gray-700">Question:</label>
           <input type="text" value="question" name="question" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
