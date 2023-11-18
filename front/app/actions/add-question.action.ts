@@ -2,10 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { ChoiceDto, QuestionDto } from "../DTOs/add-question.dto";
+import { Indicator } from "../models/indicator";
 
 const buildIndicatorCoefficients = (formData: FormData, choiceIndex: Number) => {
-    const indicators = ['HAPPY', 'ENJOYMENT', 'MONEY'];
-    return indicators.map((indicator, index) => ({
+    return Object.values(Indicator).map((indicator, index) => ({
         indicator,
         coefficient: Number(formData.get(`choices[${choiceIndex}].indicator[${index}]`))
     }));
@@ -19,6 +19,7 @@ const buildChoices = (formData: FormData) => {
 }
   
 export const addQuestionAction = async (formData: FormData) => {
+    
     const question: QuestionDto = {
         title: formData.get('question') as string,
         answer: formData.get('answer') as string,
