@@ -10,7 +10,7 @@ interface ButtonProps {
 
 export default function Button({ text, onClick, href }: ButtonProps) {
     return (
-        <div className='flex flex-row items-center bg-yellowColor rounded-full px-5 py-2 gap-2 shadow-yellowColor transition ease-in-out hover:shadow-buttonHoverColor hover:scale-110'>
+        <div className='flex flex-row items-center justify-center bg-yellowColor rounded-full px-5 py-2 gap-2 shadow-yellowColor transition ease-in-out hover:shadow-buttonHoverColor hover:scale-110'>
             {href ? 
                 (<Link href={href!}>
                     <button onClick={onClick} className=" text-black font-bold">
@@ -26,7 +26,7 @@ export default function Button({ text, onClick, href }: ButtonProps) {
             }
         
             <Image
-                src="arrow-narrow-right.svg"
+                src="/arrow-narrow-right.svg"
                 alt="Arrow"
                 style={{ width: 20, height: 20 }}
                 width={20}
