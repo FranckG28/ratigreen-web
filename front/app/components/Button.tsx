@@ -5,10 +5,11 @@ import Link from 'next/link';
 interface ButtonProps {
     text: string;
     href?: string;
+    type?: "submit" | "reset" | "button";
     onClick?: () => void;
 }
 
-export default function Button({ text, onClick, href }: ButtonProps) {
+export default function Button({ text, onClick, href, type }: ButtonProps) {
     return (
         <div className='flex flex-row items-center justify-center bg-yellowColor rounded-full px-5 py-2 gap-2 shadow-yellowColor transition ease-in-out hover:shadow-buttonHoverColor hover:scale-110'>
             {href ? 
@@ -19,7 +20,7 @@ export default function Button({ text, onClick, href }: ButtonProps) {
                   </Link>
                   ) : 
                 (
-                    <button onClick={onClick} className=" text-black font-bold">
+                    <button onClick={onClick} className=" text-black font-bold" type={type}>
                             {text}
                     </button>
                 )
