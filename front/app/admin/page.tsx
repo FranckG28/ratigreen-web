@@ -1,4 +1,5 @@
 import { Question } from '../models/question';
+import Button from '../components/Button';
 
 async function getData() : Promise<Question[]> {
     const res = await fetch('http://localhost:3000/api/questions')
@@ -15,10 +16,15 @@ export default async function Admin() {
     const questions = await getData()
  
    return (
-     <div className="flex flex-col m-4 gap-2">
-         <h1 className="text-2xl font-bold opacity-80">Admin page </h1>
-         <div>
-             <h2 className="text-lg font-bold mb-4">Questions</h2>
+     <>
+        <div className='flex justify-between'>
+            <h1 className="text-3xl font-bold">Questions disponibles</h1>
+            <div className=''>
+                <Button text="Ajouter une question" href="/admin/add" />
+            </div>
+        </div>
+        
+        <div className="flex flex-col m-4 gap-2">
              {questions.map((question, index) => (
                  <div key={index} className="p-4 border rounded shadow mb-4">
                      <h3 className="text-xl font-semibold mb-2">{question.title}</h3>
@@ -36,7 +42,7 @@ export default async function Admin() {
                  </div>
              ))}
          </div>
-     </div>
+     </>
    )
  }
  

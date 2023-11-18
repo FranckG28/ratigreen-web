@@ -5,7 +5,12 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <main className='flex flex-col justify-between min-h-screen '>
-      <Image className="self-end mr-8 mt-8" src="/music-note.svg" alt="Music note" width={30} height={30} />
+      <div className="self-end mr-8 mt-8 flex gap-4" >
+        <Link href="/admin">
+          <Image src="/admin.svg" alt="Admin lock" width={30} height={30} className="transition-transform hover:scale-110 hover:opacity-80" />
+        </Link>
+        <Image  src="/music-note.svg" alt="Music note" width={30} height={30} />
+      </div>
       <div className="flex flex-col items-center justify-center gap-y-8">
       <div className="w-2/3 md:w-1/4">
           <Image style={{ width: 'auto', height: 'auto' }}
