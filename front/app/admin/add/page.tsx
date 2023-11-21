@@ -2,22 +2,8 @@
 
 import { addQuestionAction } from '@/app/actions/add-question.action';
 import React, { useState } from 'react'
-import Image from 'next/image'
-import { Indicator } from '@/app/models/indicator';
 import Button from '@/app/components/Button';
-
-function getIndicatorImage(indicator: Indicator): string {
-  switch (indicator) {
-    case Indicator.MONEY:
-      return "/coins-hand.svg";
-    case Indicator.ENJOYMENT:
-      return "/activity-heart.svg";
-    case Indicator.HAPPY:
-      return "/face-happy.svg";
-    default:
-      return ""; // return a default image or an empty string
-  }
-}
+import ChoiceInput from './components/ChoiceInput';
 
 export default function CreateQuestion() {
 
@@ -57,79 +43,20 @@ export default function CreateQuestion() {
             <div className=''>
             </div>
 
-            <div className=' bg-progressBlue h-500 rounded-2xl'>
-              <div className='flex flex-col gap-2 p-5'>
-                <h1 className='text-2xl opacity-80 font-bold uppercase'>Premier choix</h1>
-                <div>
-                  <h2 className='text-lg opacity-80 font-bold uppercase'>Réponse</h2>
-                  <textarea style={{ resize: 'none' }} name="choices[0].text" className='rounded-2xl bg-white h-24 p-4 text-black w-full' required defaultValue="Oui, c'est une maladie grave." ></textarea>
-                </div>
-                
-                <div>
-                  <h2 className='text-lg opacity-80 font-bold uppercase'>Effets sur les indicateurs</h2>
-                  <div className='mt-2 flex lg:gap-12 flex-col lg:flex-row'>
-                    {Object.values(Indicator).map((indicator, index) => {
-                        return (
-                          <div className='flex gap-2' key={index}>
-                            <Image src={getIndicatorImage(indicator)} alt="Arrow" width={30} height={30} style={{width: 30, height: 30}}></Image>
-                            <input 
-                              type='number' 
-                              min="-100"
-                              max="100"
-                              defaultValue="0"
-                              name={ 'choices[0].indicator['+index+']' }
-                              className='font-bold text-2xl border-2 rounded-lg lg:w-full bg-transparent lg:text-center border-transparent'
-                            />
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
+            <ChoiceInput
+              indexChoice={0}
+              isAnswer={isAnswerFirstChoice}
+              onRadioClickIsAnswer={onAnswerFirstChoice}
+              choiceTitle="Premier choix"
+            />
 
-                <div className='flex gap-5 items-center'>
-                  <h2 className='text-lg opacity-80 font-bold uppercase'>Est-ce la bonne réponse ?</h2> 
-                  <input type='radio' name='isAnswerFirstChoice' checked={isAnswerFirstChoice} readOnly onClick={() => onAnswerFirstChoice()} className='w-6 h-6'></input>
-                </div> 
-              </div>
-            </div>
-              
-            <div className=' bg-progressBlue h-500 rounded-2xl'>
-              <div className='flex flex-col gap-2 p-5'>
-                <h1 className='text-2xl opacity-80 font-bold uppercase'>Deuxième choix</h1>
-                <div>
-                  <h2 className='text-lg opacity-80 font-bold uppercase'>Réponse</h2>
-                  <textarea style={{ resize: 'none' }} name="choices[1].text" className='rounded-2xl bg-white h-24 p-4 text-black w-full' required defaultValue="Ahhh non, qu’elle s’attelle à la tâche !" ></textarea>
-                </div>
-                
-                <div>
-                  <h2 className='text-lg opacity-80 font-bold uppercase'>Effets sur les indicateurs</h2>
-                  <div className='mt-2 flex lg:gap-12 flex-col lg:flex-row'>
-                    {Object.values(Indicator).map((indicator, index) => {
-                        return (
-                          <div className='flex gap-2' key={index}>
-                            <Image src={getIndicatorImage(indicator)} alt="Arrow" width={30} height={30} style={{width: 30, height: 30}}></Image>
-                            <input 
-                              type='number' 
-                              min="-100"
-                              max="100"
-                              defaultValue="0"
-                              name={ 'choices[1].indicator['+index+']' }
-                              className='font-bold text-2xl border-2 rounded-lg lg:w-full bg-transparent lg:text-center border-transparent'
-                            />
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-
-                <div className='flex gap-5 items-center'>
-                  <h2 className='text-lg opacity-80 font-bold uppercase'>Est-ce la bonne réponse ?</h2> 
-                  <input type='radio' name='isAnswerSecondChoice' checked={!isAnswerFirstChoice} readOnly onClick={() => onAnswerFirstChoice()} className='w-6 h-6'></input>
-                </div> 
-              </div>
-            </div>
+            <ChoiceInput
+              indexChoice={1}
+              isAnswer={!isAnswerFirstChoice}
+              onRadioClickIsAnswer={onAnswerFirstChoice}
+              choiceTitle="Second choix"
+            /> 
           </section>
-          
         </form>
     </>
   );

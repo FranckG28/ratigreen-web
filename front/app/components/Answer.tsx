@@ -5,7 +5,7 @@ import IndicatorResult from './IndicatorResult';
 import ProgressBar from './ProgressBar';
 import { Question } from '../models/question';
 import { Choice } from '../models/choice';
-import { Indicator } from '../models/indicator';
+import { getIndicatorImage } from '../utility/indicator-image-path';
 
 export interface ResultProps {
     img: string;
@@ -13,20 +13,6 @@ export interface ResultProps {
     choice: Choice;
     nextQuestion: () => void
 }
-
-function getIndicatorImage(indicator: Indicator): string {
-  switch (indicator) {
-    case Indicator.MONEY:
-      return "/coins-hand.svg";
-    case Indicator.ENJOYMENT:
-      return "/activity-heart.svg";
-    case Indicator.HAPPY:
-      return "/face-happy.svg";
-    default:
-      return ""; // return a default image or an empty string
-  }
-}
-
 
 export default function Answer({img, question, choice, nextQuestion}: ResultProps) {
   return (
