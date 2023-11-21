@@ -28,7 +28,7 @@ export const addQuestionAction = async (formData: FormData) => {
         
     console.log(JSON.stringify(question));
 
-    await fetch('http://localhost:3000/api/questions', {
+    await fetch(process.env.API_ROUTE_URL + 'questions', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'

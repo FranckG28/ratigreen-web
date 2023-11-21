@@ -2,7 +2,7 @@ import { Question } from '../models/question';
 import Button from '../components/Button';
 
 async function getData() : Promise<Question[]> {
-    const res = await fetch('http://localhost:3000/api/questions')
+    const res = await fetch(process.env.API_ROUTE_URL + 'questions')
    
     if (!res.ok) {
       throw new Error('Failed to fetch data')
