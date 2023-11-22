@@ -4,6 +4,7 @@ import { addQuestionAction } from '@/app/actions/add-question.action';
 import React, { useState } from 'react'
 import Button from '@/app/components/Button';
 import ChoiceInput from './components/ChoiceInput';
+import { toast } from '@/app/components/Toast';
 
 export default function CreateQuestion() {
 
@@ -12,11 +13,17 @@ export default function CreateQuestion() {
     setIsAnswerFirstChoice(!isAnswerFirstChoice);
   }
 
-  const onAddQuestion = (formData: FormData) => {
+  const onAddQuestion = async (formData: FormData) => {
     const answer : string = isAnswerFirstChoice ? formData.get("choices[0].text") as string : formData.get("choices[1].text") as string;
     formData.append("answer", answer);
 
-    addQuestionAction(formData);
+    const response = await addQuestionAction(formData);
+
+    if (response.status === 200) {
+      toast.success(response.text);
+    } else {
+      toast.error('Une erreur est survenue lors de l\'ajout de la question.');
+    }
   }
 
   return (

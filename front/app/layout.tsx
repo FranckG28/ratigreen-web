@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { ToastContainer } from './components/Toast';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ 
   weight: ['400', '700'],
@@ -19,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-primaryColor text-white`}>{children}</body>
+      <body className={`${inter.className} bg-primaryColor text-white`}>
+        {children}
+        <ToastContainer />
+      </body>
     </html>
   )
 }
