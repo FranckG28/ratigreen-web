@@ -81,22 +81,37 @@ export class QuestionsService {
   }
 
   async deleteQuestion(id: number) {
-    await this.prisma.indicatorCoefficient.deleteMany({
-      where: {
-        choice: {
+    try {
+      // get all the choices of the question
+      const choices = await this.prisma.choice.findMany({
+        where: {
           questionId: id,
         },
-      },
-    });
+      });
 
-    await this.prisma.choice.deleteMany({
-      where: {
-        questionId: id,
-      },
-    });
+      // delete all the indicator coefficients of the choices
+      await Promise.all(
+        choices.map((choice) =>
+          this.prisma.indicatorCoefficient.deleteMany({
+            where: {
+              choiceId: choice.id,
+            },
+          }),
+        ),
+      );
 
-    return this.prisma.question.delete({
-      where: { id },
-    });
+      // delete all the choices of the question
+      await this.prisma.choice.deleteMany({
+        where: {
+          questionId: id,
+        },
+      });
+
+      return this.prisma.question.delete({
+        where: { id },
+      });
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 }
