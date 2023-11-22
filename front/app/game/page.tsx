@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import IndicatorProgress from '../components/IndicatorProgress';
 import Answer from '../components/Answer';
-import { GET } from './api';
+import { getQuestions } from './get-questions.action';
 import { Question as QuestionModel } from '../models/question';
 import Question from '../components/Question';
 import { Choice } from '../models/choice';
@@ -29,7 +29,7 @@ export default function Game() {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const result = await GET();
+      const result = await getQuestions();
       // randomize questions order
       result.sort(() => Math.random() - 0.5);
       console.log(result);

@@ -2,6 +2,7 @@ import { Question } from '../models/question';
 import Button from '../components/Button';
 
 async function getData() : Promise<Question[]> {
+    "use server"
     const res = await fetch(process.env.API_ROUTE_URL + 'questions')
    
     if (!res.ok) {
