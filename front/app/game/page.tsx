@@ -89,9 +89,9 @@ export default function Game() {
 
         {actualQuestion && questions 
           ? (isResultPage 
-            ? <Answer choice={choice!} img="/preservatifs.jpg" question={actualQuestion} nextQuestion={nextQuestion} /> 
+            ? <Answer choice={choice!} img={process.env.NEXT_PUBLIC_API_URL_IMAGE + `${actualQuestion.imageUrl}`} question={actualQuestion} nextQuestion={nextQuestion} /> 
             : <Question 
-                img={process.env.NEXT_PUBLIC_API_URL + `questions/image/${actualQuestion.imageUrl}`}
+                img={process.env.NEXT_PUBLIC_API_URL_IMAGE + `${actualQuestion.imageUrl}`}
                 question={actualQuestion!.title}
                 leftChoice={actualQuestion.choices[0]}
                 rightChoice={actualQuestion.choices[1]}

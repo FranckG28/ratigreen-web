@@ -1,10 +1,11 @@
 "use client"
 
-import { addQuestionAction } from '@/app/actions/add-question.action';
+import { addImageQuestionAction, addQuestionAction } from '@/app/actions/add-question.action';
 import React, { useRef, useState } from 'react'
 import Button from '@/app/components/Button';
 import ChoiceInput from '../components/ChoiceInput';
 import { toast } from '@/app/components/Toast';
+import FileInput from '../components/FileInput';
 
 export default function CreateQuestion() {
 
@@ -15,20 +16,28 @@ export default function CreateQuestion() {
     setIsAnswerFirstChoice(!isAnswerFirstChoice);
   }
 
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+
   const onAddQuestion = async (formData: FormData) => {
+
     const answer : string = isAnswerFirstChoice ? formData.get("choices[0].text") as string : formData.get("choices[1].text") as string;
     formData.append("answer", answer);
 
     const response = addQuestionAction(formData);
+    response.then(async (responseQuestion) => {
+      const returnQuestionInfo = JSON.parse(responseQuestion.text);
+      const questionId = returnQuestionInfo.id;
 
-    if ((await response).status === 200) {
-      toast.success((await response).text);
+      const responseImage = await addImageQuestionAction(formData, questionId);
 
-      // reset form
-      ref.current?.reset();
-    } else {
-      toast.error('Une erreur est survenue lors de l\'ajout de la question.');
-    }
+      if (responseQuestion.status === 200 && responseImage.status === 200) {
+        toast.success(JSON.parse(responseQuestion.text).message);
+        ref.current?.reset();
+        setImagePreviewUrl(null);
+      } else {
+        toast.error('Une erreur est survenue lors de l\'ajout de la question et de l\'image.');
+      }
+    });
   }
 
   return (
@@ -51,7 +60,9 @@ export default function CreateQuestion() {
           <textarea style={{ resize: 'none' }} name="question" className='rounded-2xl bg-pinkColor p-4 h-full' defaultValue="Est-ce que le VIH est une maladie ?" required></textarea>
         </div>
 
-        <div className=''>
+        <div className='flex flex-col gap-2'>
+            <h2 className='text-2xl opacity-80 font-bold uppercase'>Insérer une image</h2>
+            <FileInput setImagePreviewUrl={setImagePreviewUrl} imagePreviewUrl={imagePreviewUrl} />
         </div>
 
         <ChoiceInput

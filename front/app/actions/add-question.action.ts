@@ -25,10 +25,11 @@ export const addQuestionAction = async (formData: FormData) => {
     const question: QuestionDto = {
         title: formData.get('question') as string,
         answer: formData.get('answer') as string,
+
         choices: buildChoices(formData) as ChoiceDto[]
     };
 
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions', {
+    const response  = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions', {
         method: 'POST',
         cache: "no-store", // to be able to send the same data twice
         headers: {
@@ -38,6 +39,7 @@ export const addQuestionAction = async (formData: FormData) => {
     });
 
     const textData = await response.text();
+
     //  const errorData = await response.json(); // Impossible L’erreur “Body is unusable” se produit lorsque vous essayez de lire le corps de la réponse plus d’une fois.
 
     //if (response.ok) { // if HTTP-status is 200-299
@@ -57,4 +59,17 @@ export const addQuestionAction = async (formData: FormData) => {
     revalidatePath('/admin')
 
     return { status: response.status, text: textData };
+}
+
+export const addImageQuestionAction = async (formData: FormData, questionId: string) => {
+    const formDataImage = new FormData();
+    formDataImage.append('image', formData.get('image') as File);
+
+    const responseImage = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions/upload/' + questionId, 
+    {
+        method: 'POST',
+        body:  formDataImage
+    });
+
+    return { status: responseImage.status, text: await responseImage.text() };
 }

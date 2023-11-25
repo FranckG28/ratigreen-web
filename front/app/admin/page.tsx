@@ -3,6 +3,7 @@
 import { Question } from '../models/question';
 import Button from '../components/Button';
 import ActionQuestion from './components/ActionQuestion';
+import Image from 'next/image';
 
 async function getData() : Promise<Question[]> {
     const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions')
@@ -35,6 +36,7 @@ export default async function Admin() {
                         <ActionQuestion actionType="delete" questionId={question.id} />
                     </div>
                      
+                    <Image className='mb-4' src={process.env.NEXT_PUBLIC_API_URL_IMAGE + `${question.imageUrl}`} alt="Question image" width={50} height={50} />
                      {question.choices.map((choice, index) => (
                          <div key={index} className="p-2 border rounded shadow mb-2">
                              <p className="font-medium">{choice.text}</p>
