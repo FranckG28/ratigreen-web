@@ -55,6 +55,7 @@ export class QuestionsController {
   @Get('image/:imagePath')
   getImage(@Param('imagePath') image: string, @Res() res) {
     try {
+      res.setHeader('Content-Type', 'image/jpeg');
       this.logger.log('Image retrieved successfully');
       return res.status(200).sendFile(image, { root: 'uploads' });
     } catch (e) {

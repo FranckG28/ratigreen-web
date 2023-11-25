@@ -28,7 +28,7 @@ export const addQuestionAction = async (formData: FormData) => {
         choices: buildChoices(formData) as ChoiceDto[]
     };
 
-    const response = await fetch(process.env.API_ROUTE_URL + 'questions', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions', {
         method: 'POST',
         cache: "no-store", // to be able to send the same data twice
         headers: {

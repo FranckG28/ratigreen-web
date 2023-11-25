@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import ActionQuestion from './components/ActionQuestion';
 
 async function getData() : Promise<Question[]> {
-    const res = await fetch(process.env.API_ROUTE_URL + 'questions')
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions')
    
     if (!res.ok) {
       throw new Error('Failed to fetch data')

@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 export const removeQuestionAction = async (id: number) => {
 
-    const response = await fetch(`${process.env.API_ROUTE_URL}questions/${id}`, { 
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}questions/${id}`, { 
         method: 'DELETE',
     });
 
