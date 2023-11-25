@@ -2,11 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as cors from 'cors';
-import {
-  BadRequestException,
-  ValidationError,
-  ValidationPipe,
-} from '@nestjs/common';
 import { CustomValidationPipe } from './pipes/custom-validation.pipe';
 
 async function bootstrap() {
@@ -27,6 +22,6 @@ async function bootstrap() {
 
   app.use(cors()); // Enable CORS
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();
