@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { ChoiceDto, QuestionDto } from "../DTOs/add-question.dto";
 import { Indicator } from "../models/indicator";
+import { redirect } from "next/navigation";
+
 
 const buildIndicatorCoefficients = (formData: FormData, choiceIndex: Number) => {
     return Object.values(Indicator).map((indicator, index) => ({
@@ -26,8 +28,6 @@ export const addQuestionAction = async (formData: FormData) => {
         choices: buildChoices(formData) as ChoiceDto[]
     };
 
-    //console.log(JSON.stringify(question));
-
     const response = await fetch(process.env.API_ROUTE_URL + 'questions', {
         method: 'POST',
         cache: "no-store", // to be able to send the same data twice
@@ -40,21 +40,21 @@ export const addQuestionAction = async (formData: FormData) => {
     const textData = await response.text();
     //  const errorData = await response.json(); // Impossible L’erreur “Body is unusable” se produit lorsque vous essayez de lire le corps de la réponse plus d’une fois.
 
-    if (response.ok) { // if HTTP-status is 200-299
-        console.info("Question added successfully");
-    } else {
-        let errorData;
-        try {
-            errorData = JSON.parse(textData);
-        } catch (e) {
-            console.error("Error parsing JSON: ", e);
-        }
-        console.error(JSON.stringify(errorData, null, 2));
-        console.log("HTTP-Error: " + response.status);
-    }
+    //if (response.ok) { // if HTTP-status is 200-299
+    //    console.info("Question added successfully");
+    //} else {
+    //    let errorData;
+    //    try {
+    //        errorData = JSON.parse(textData);
+    //    } catch (e) {
+    //        console.error("Error parsing JSON: ", e);
+    //    }
+    //    console.error(JSON.stringify(errorData, null, 2));
+    //    console.log("HTTP-Error: " + response.status);
+    //}
 
     // Revalidate cache when we will refresh the page /admin
-    revalidatePath('/admin');
+    revalidatePath('/admin')
 
     return { status: response.status, text: textData };
 }

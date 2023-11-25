@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-spring/web": "^9.5.5",
+    "lucide-react": "^0.292.0",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",
