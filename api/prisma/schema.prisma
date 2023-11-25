@@ -8,7 +8,6 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  
 }
 
 generator client {
@@ -16,10 +15,11 @@ generator client {
 }
 
 model Question {
-  id      Int      @id @default(autoincrement())
-  title   String
-  choices Choice[]
-  answer  String
+  id       Int      @id @default(autoincrement())
+  title    String
+  choices  Choice[]
+  answer   String
+  imageUrl String
 }
 
 enum Indicator {
@@ -29,11 +29,11 @@ enum Indicator {
 }
 
 model Choice {
-  id                     Int                  @id @default(autoincrement())
-  text                   String
-  question               Question             @relation(fields: [questionId], references: [id])
-  questionId             Int
-  indicatorCoefficients  IndicatorCoefficient[]
+  id                    Int                    @id @default(autoincrement())
+  text                  String
+  question              Question               @relation(fields: [questionId], references: [id])
+  questionId            Int
+  indicatorCoefficients IndicatorCoefficient[]
 }
 
 model IndicatorCoefficient {

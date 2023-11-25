@@ -12,32 +12,37 @@ export class QuestionsService {
       throw new BadRequestException('A question must have exactly 2 choices');
     }
 
-    return this.prisma.question.create({
-      data: {
-        title: data.title,
-        answer: data.answer,
-        choices: {
-          create: data.choices.map((choice) => ({
-            text: choice.text,
-            indicatorCoefficients: {
-              create: choice.indicatorCoefficients.map(
-                (indicatorCoefficient) => ({
-                  indicator: indicatorCoefficient.indicator,
-                  coefficient: indicatorCoefficient.coefficient,
-                }),
-              ),
-            },
-          })),
-        },
-      },
-      include: {
-        choices: {
-          include: {
-            indicatorCoefficients: true,
+    try {
+      return this.prisma.question.create({
+        data: {
+          title: data.title,
+          answer: data.answer,
+          imageUrl: '',
+          choices: {
+            create: data.choices.map((choice) => ({
+              text: choice.text,
+              indicatorCoefficients: {
+                create: choice.indicatorCoefficients.map(
+                  (indicatorCoefficient) => ({
+                    indicator: indicatorCoefficient.indicator,
+                    coefficient: indicatorCoefficient.coefficient,
+                  }),
+                ),
+              },
+            })),
           },
         },
-      },
-    });
+        include: {
+          choices: {
+            include: {
+              indicatorCoefficients: true,
+            },
+          },
+        },
+      });
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 
   async getQuestions() {
@@ -48,6 +53,22 @@ export class QuestionsService {
             indicatorCoefficients: true,
           },
         },
+      },
+    });
+  }
+
+  async getImage(id: number) {
+    const question = await this.prisma.question.findUnique({
+      where: { id },
+    });
+    return question.imageUrl;
+  }
+
+  async addImage(id: number, image: string) {
+    return this.prisma.question.update({
+      where: { id },
+      data: {
+        imageUrl: image,
       },
     });
   }
