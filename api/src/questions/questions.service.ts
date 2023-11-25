@@ -2,18 +2,21 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
+import { Question } from '@prisma/client';
+import { unlinkSync } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class QuestionsService {
   constructor(private prisma: PrismaService) {}
 
-  async createQuestion(data: CreateQuestionDto) {
+  async createQuestion(data: CreateQuestionDto): Promise<Question> {
     if (!data.choices || data.choices.length !== 2) {
       throw new BadRequestException('A question must have exactly 2 choices');
     }
 
     try {
-      return this.prisma.question.create({
+      return await this.prisma.question.create({
         data: {
           title: data.title,
           answer: data.answer,
@@ -127,6 +130,15 @@ export class QuestionsService {
           questionId: id,
         },
       });
+
+      // delete the image of the question inside the uploads folder
+      const question = await this.prisma.question.findUnique({
+        where: { id },
+      });
+      if (question.imageUrl) {
+        const filePath = join(process.cwd(), 'uploads', question.imageUrl);
+        unlinkSync(filePath);
+      }
 
       return this.prisma.question.delete({
         where: { id },

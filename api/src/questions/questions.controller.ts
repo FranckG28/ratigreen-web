@@ -23,11 +23,15 @@ export class QuestionsController {
   constructor(private readonly questionsService: QuestionsService) {}
 
   @Post()
-  create(@Body() createQuestionDto: CreateQuestionDto, @Res() res) {
+  async create(@Body() createQuestionDto: CreateQuestionDto, @Res() res) {
     try {
-      this.questionsService.createQuestion(createQuestionDto);
+      const createdQuestion =
+        await this.questionsService.createQuestion(createQuestionDto);
       this.logger.log('Question created successfully');
-      res.status(200).send('Question created successfully');
+      return res.status(200).send({
+        id: createdQuestion.id,
+        message: 'Question created successfully',
+      });
     } catch (e) {
       this.logger.error(e);
       res.status(400).send('An error occured while creating the question');
