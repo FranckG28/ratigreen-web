@@ -3,6 +3,7 @@ import ThemeChanger from "./components/ThemeChanger";
 import Container from "./components/Container";
 import Ratilogo from "./components/Ratilogo";
 import Balancer from "react-wrap-balancer";
+import CallToLogin from "./components/CallToLogin";
 
 export default function Home() {
   return (
@@ -19,18 +20,20 @@ export default function Home() {
     //     </Link>
     //     <Image src="/music-note.svg" alt="Music note" width={30} height={30} />
     //   </div>
-    <Container className="flex flex-col gap-4 items-center justify-center">
+    <Container className="flex flex-col gap-6 items-center justify-center">
       <ThemeChanger />
 
       <Ratilogo size="lg" />
       {/* </div> */}
 
       <Balancer className="max-w-prose p-2 text-center">
-        Soyez green avec ratigreen 🐀
+        Restez <span className="text-success">green</span> avec{" "}
+        <span className="font-medium text-success">Ratigreen</span> 🐀
       </Balancer>
       <Link href="/game" className="btn btn-primary btn-lg">
         Démarrer
       </Link>
+      <CallToLogin />
     </Container>
     // </main>
   );
