@@ -11,7 +11,9 @@ export default function LoginPage() {
         <LoginForm />
         <p className="text-base-content">
           Vous n'avez pas encore de compte ?{" "}
-          <Link href={"/auth/register"}>S'inscrire</Link>
+          <Link href={"/auth/register"} className="link link-secondary">
+            S'inscrire
+          </Link>
         </p>
       </div>
 

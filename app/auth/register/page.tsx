@@ -11,7 +11,9 @@ export default function RegisterPage() {
         <RegisterForm />
         <p className="text-base-content">
           Vous avez déjà un compte ?{" "}
-          <Link href={"/auth/login"}>Se connecter</Link>
+          <Link href={"/auth/login"} className="link link-secondary">
+            Se connecter
+          </Link>
         </p>
       </div>
       <CallToLogin></CallToLogin>
