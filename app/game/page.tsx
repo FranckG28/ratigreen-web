@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import IndicatorProgress from "../components/IndicatorProgress";
 import Answer from "../components/Answer";
 import { getQuestions } from "./get-questions.action";

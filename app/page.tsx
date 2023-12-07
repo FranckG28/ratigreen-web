@@ -4,37 +4,42 @@ import Container from "./components/Container";
 import Ratilogo from "./components/Ratilogo";
 import Balancer from "react-wrap-balancer";
 import CallToLogin from "./components/CallToLogin";
+import { ArrowRight, HelpCircle } from "lucide-react";
 
 export default function Home() {
   return (
-    // <main className="flex flex-col justify-between min-h-screen ">
-    //   <div className="self-end mr-8 mt-8 flex gap-4">
-    //     <Link href="/admin">
-    //       <Image
-    //         src="/admin.svg"
-    //         alt="Admin lock"
-    //         width={30}
-    //         height={30}
-    //         className="transition-transform hover:scale-110 hover:opacity-80"
-    //       />
-    //     </Link>
-    //     <Image src="/music-note.svg" alt="Music note" width={30} height={30} />
-    //   </div>
-    <Container className="flex flex-col gap-6 items-center justify-center">
-      <ThemeChanger />
+    <Container className="flex-col gap-6 items-center grid xl:grid-cols-2">
+      <div className="flex flex-col justify-start gap-3">
+        <Ratilogo size="lg" />
 
-      <Ratilogo size="lg" />
-      {/* </div> */}
+        <Balancer className="max-w-prose p-2">
+          Restez <span className="text-success">green</span> avec{" "}
+          <span className="font-medium">Ratigreen</span> 🐀
+        </Balancer>
+        <Link
+          href="/game"
+          className="btn btn-primary btn-lg transition group hover:scale-105"
+        >
+          Démarrer
+          <ArrowRight className="group-hover:translate-x-1 transition-all" />
+        </Link>
+        <button className="btn btn-ghost">
+          Comment jouer ? <HelpCircle />
+        </button>
+        <CallToLogin>
+          <div className="flex gap-2 items-center">
+            <Link className="btn btn-secondary" href="/auth/register">
+              S'inscrire
+            </Link>
+            <Link className="btn btn-ghost" href="/auth/login">
+              Se connecter
+            </Link>
+          </div>
+        </CallToLogin>
 
-      <Balancer className="max-w-prose p-2 text-center">
-        Restez <span className="text-success">green</span> avec{" "}
-        <span className="font-medium">Ratigreen</span> 🐀
-      </Balancer>
-      <Link href="/game" className="btn btn-primary btn-lg">
-        Démarrer
-      </Link>
-      <CallToLogin />
+        <ThemeChanger />
+      </div>
+      <div className="">{/* todo insert planet */}</div>
     </Container>
-    // </main>
   );
 }
