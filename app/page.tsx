@@ -28,7 +28,7 @@ export default function Home() {
 
       <Balancer className="max-w-prose p-2 text-center">
         Restez <span className="text-success">green</span> avec{" "}
-        <span className="font-medium text-success">Ratigreen</span> 🐀
+        <span className="font-medium">Ratigreen</span> 🐀
       </Balancer>
       <Link href="/game" className="btn btn-primary btn-lg">
         Démarrer

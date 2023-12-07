@@ -400,10 +400,10 @@ export default function Ratilogo({ size = "md" }: { size?: LogoSize }) {
       <p
         className={classNames(
           textSizes[size],
-          "text-base-content tracking-tighter font-medium select-none"
+          "text-base-content tracking-tighter select-none"
         )}
       >
-        Ratiscrum
+        Rati<span className="font-medium text-success">green</span>
       </p>
     </div>
   );
