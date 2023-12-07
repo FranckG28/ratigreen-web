@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+import { themes } from './themes'
+import { ratiscrum } from './themes/ratiscrum'
 
 const config: Config = {
   content: [
@@ -13,20 +15,11 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      colors: {
-        yellowColor: '#F3CC31',
-        primaryColor: '#2D1B69',
-        progressBlue: '#57C8F2',
-        pinkColor: '#E779C1',
-        hoverColor: '#20134E'
-      },
-      boxShadow: {
-        yellowColor: '0px 0px 25px 0.5px #F3CC31',
-        buttonHoverColor: '0px 1px 30px 2px #F3CC31',
-        pinkCardShadow: "0px 56px 100px 40px #e779c13b"
-      },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [...themes, ratiscrum]
+  }
 }
 export default config
