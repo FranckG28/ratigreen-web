@@ -1,6 +1,7 @@
 import { navbarLinks } from "@/navbar-links";
 import Link from "next/link";
 import Ratilogo from "./Ratilogo";
+import UserCard from "./UserCard";
 
 export default function Navbar() {
   return (
@@ -17,33 +18,8 @@ export default function Navbar() {
               <Link href={link.url}>{link.label}</Link>
             </li>
           ))}
+          <UserCard />
         </ul>
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full bg-primary"></div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   );

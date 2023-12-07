@@ -23,7 +23,7 @@ export default function Answer({
     <div className="flex lg:flex-row flex-col lg:gap-28 gap-10">
       <div className="flex flex-col lg:w-1/2 gap-5">
         <h1 className="opacity-60 font-bold text-2xl uppercase">Résultats</h1>
-        <div className="flex flex-col bg-white rounded-xl justify-center shadow-pinkCardShadow">
+        <div className="flex flex-col bg-white rounded-xl justify-center shadow shadow-primary/20">
           <div className="flex flex-row gap-10 items-center grow justify-center p-10">
             <Image
               style={{
@@ -37,7 +37,7 @@ export default function Answer({
               width={100}
               height={100}
             ></Image>
-            <p className="text-primaryColor text-lg font-bold text-center select-none">
+            <p className="text-primary-content text-lg font-bold text-center select-none">
               {question.title}
             </p>
           </div>
@@ -80,9 +80,9 @@ export default function Answer({
         <h1 className="opacity-60 font-bold text-2xl uppercase">
           Commentaires
         </h1>
-        <div className="flex flex-col bg-white rounded-xl h-3/4 justify-center shadow-pinkCardShadow">
+        <div className="flex flex-col bg-white rounded-xl h-3/4 justify-center shadow shadow-primary/50">
           <div className="flex flex-row gap-10 items-center grow justify-center">
-            <p className="text-primaryColor text-lg font-bold text-center p-10">
+            <p className="text-primary-content text-lg font-bold text-center p-10">
               {question.answer}
             </p>
           </div>

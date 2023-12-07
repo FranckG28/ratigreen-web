@@ -6,12 +6,4 @@ export interface NavbarLink {
 }
 
 export const navbarLinks: NavbarLink[] = [
-    {
-        label: 'Register',
-        url: '/register',
-    },
-    {
-        label: 'Admin',
-        url: '/admin',
-    }
 ];
