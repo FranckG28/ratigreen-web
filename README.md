@@ -1,63 +1,36 @@
-![Ratisexe](front/public/ratisexe_logo.svg)
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Next.js and Nest.js web app which serves to educate young adults  in order to help them take control of their sexuality. 👨‍⚕️
+## Getting Started
 
-# Table of contents
+First, run the development server:
 
-- [Architecture](#architecture)
-- [Development](#development)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Frontend](#frontend)
-  - [Backend](#backend)
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-# Architecture
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- The project is divided into two parts: the frontend and the backend.
-- The frontend is built with Next.js and the backend with Nest.js.
-- The backend is a REST API that serves the frontend.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-# Screenshots of the project
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-### Home page
-![image](https://github.com/HybridPlanner/frontend/assets/62793491/11389eb9-c50c-4810-bd18-d982a38481d7)
+## Learn More
 
-### Admin page
-![image](https://github.com/HybridPlanner/frontend/assets/62793491/70d3e433-936e-405a-9c2e-768f73cb5423)
+To learn more about Next.js, take a look at the following resources:
 
-### Question page
-![image](https://github.com/HybridPlanner/frontend/assets/62793491/7c15960b-a08f-4668-865c-07f09bb97ee8)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Answer page
-![image](https://github.com/HybridPlanner/frontend/assets/62793491/c0f6c4d0-259c-4aee-a11b-7d2cb2f4ae20)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Deploy on Vercel
 
-# Development
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Prerequisites
-
-- Node.js
-- NPM
-- Docker
-
-## Installation
-
-1. Clone the repository
-
-## Frontend
-
-1. Go to the `front` directory
-2. Run `npm install`
-3. Run `npm run dev`
-4. Go to `http://localhost:3000`
-
-## Backend
-
-1. Go to the `api` directory
-2. Run `npm install`
-3. Run `docker-compose up` to start the database
-4. Run `npm run start:dev`
-
-# About this project 
-
-- This is a remake of the original project of the "Nuit de l'info" 2022 by the team "Ratiscrum" created in React only.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
