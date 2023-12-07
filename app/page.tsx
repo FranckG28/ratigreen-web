@@ -5,6 +5,8 @@ import Ratilogo from "./components/Ratilogo";
 import Balancer from "react-wrap-balancer";
 import CallToLogin from "./components/CallToLogin";
 import { ArrowRight, HelpCircle } from "lucide-react";
+import OTPReminder from "./otp/components/OTPReminder";
+import OTPSetup from "./otp/components/OTPSetup";
 
 export default function Home() {
   return (
@@ -36,7 +38,6 @@ export default function Home() {
             </Link>
           </div>
         </CallToLogin>
-
         <ThemeChanger />
       </div>
       <div className="">{/* todo insert planet */}</div>
