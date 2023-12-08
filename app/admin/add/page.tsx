@@ -2,7 +2,6 @@
 
 import {
   addImageQuestionAction,
-  addQuestionAction,
 } from "@/app/actions/add-question.action";
 import React, { useRef, useState } from "react";
 import ChoiceInput from "../components/ChoiceInput";
@@ -26,23 +25,23 @@ export default function CreateQuestion() {
       : (formData.get("choices[1].text") as string);
     formData.append("answer", answer);
 
-    const response = addQuestionAction(formData);
-    response.then(async (responseQuestion) => {
-      const returnQuestionInfo = JSON.parse(responseQuestion.text);
-      const questionId = returnQuestionInfo.id;
-
-      const responseImage = await addImageQuestionAction(formData, questionId);
-
-      if (responseQuestion.status === 200 && responseImage.status === 200) {
-        toast.success(JSON.parse(responseQuestion.text).message);
-        ref.current?.reset();
-        setImagePreviewUrl(null);
-      } else {
-        toast.error(
-          "Une erreur est survenue lors de l'ajout de la question et de l'image."
-        );
-      }
-    });
+    //const response = addQuestionAction(formData);
+    //response.then(async (responseQuestion) => {
+    //  const returnQuestionInfo = JSON.parse(responseQuestion.text);
+    //  const questionId = returnQuestionInfo.id;
+//
+    //  const responseImage = await addImageQuestionAction(formData, questionId);
+//
+    //  if (responseQuestion.status === 200 && responseImage.status === 200) {
+    //    toast.success(JSON.parse(responseQuestion.text).message);
+    //    ref.current?.reset();
+    //    setImagePreviewUrl(null);
+    //  } else {
+    //    toast.error(
+    //      "Une erreur est survenue lors de l'ajout de la question et de l'image."
+    //    );
+    //  }
+    //});
   };
 
   return (

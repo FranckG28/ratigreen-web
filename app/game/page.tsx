@@ -4,22 +4,22 @@ import React, { useEffect, useState } from "react";
 import IndicatorProgress from "../components/IndicatorProgress";
 import Answer from "../components/Answer";
 import { getQuestions } from "./get-questions.action";
-import { Question as QuestionModel } from "../models/question";
+import { Question as QuestionModel } from "../models/question.model";
 import Question from "../components/Question";
-import { Choice } from "../models/choice";
-import { Indicator } from "../models/indicator";
 import { Rat } from "lucide-react";
 import Badge from "../components/Badge";
 
 export default function Game() {
-  const [moneyProgress, setMoneyProgress] = useState(50);
-  const [enjoymentProgress, setEnjoymentProgress] = useState(50);
-  const [happyProgress, setHappyProgress] = useState(50);
+  const [planetTemperature, setPlanetTemperature] = useState(50);
+
   const [day, setDay] = useState(1);
 
   const [actualQuestion, setActualQuestion] = useState<QuestionModel | null>(
     null
   );
+
+  const [actualAnswerUser, setActualAnswerUser] = useState<string>('');
+
   const [questions, setQuestions] = useState<QuestionModel[] | null>(null);
 
   const nextQuestion = () => {
@@ -43,41 +43,18 @@ export default function Game() {
 
   const [isResultPage, setIsResultPage] = useState(false);
 
-  const [choice, setChoice] = useState<Choice>();
-
-  const onChoice = (choice: Choice) => {
+  const onChoice = (answerUser: boolean) => {
     setIsResultPage(true);
-    setChoice(choice);
-
-    // Update progress values based on choice
-    choice.indicatorCoefficients.forEach((ic) => {
-      switch (ic.indicator) {
-        case Indicator.MONEY:
-          setMoneyProgress((prev) => prev + ic.coefficient);
-          break;
-        case Indicator.ENJOYMENT:
-          setEnjoymentProgress((prev) => prev + ic.coefficient);
-          break;
-        case Indicator.HAPPY:
-          setHappyProgress((prev) => prev + ic.coefficient);
-          break;
-        default:
-          break;
-      }
-    });
+    if(answerUser) setActualAnswerUser('Vrai');
+    else setActualAnswerUser('Faux');
+    setPlanetTemperature(+1);
   };
 
   return (
     <main className="flex flex-col m-10 gap-4 lg:gap-10">
       <div className="flex flex-col lg:flex-row max-lg:gap-4 items-center justify-center">
         <div className="flex flex-col grow justify-center lg:flex-row gap-4 lg:gap-6 items-center">
-          <IndicatorProgress value={moneyProgress}>
-            <Rat></Rat>
-          </IndicatorProgress>
-          <IndicatorProgress value={enjoymentProgress}>
-            <Rat></Rat>
-          </IndicatorProgress>
-          <IndicatorProgress value={happyProgress}>
+          <IndicatorProgress value={planetTemperature}>
             <Rat></Rat>
           </IndicatorProgress>
         </div>
@@ -89,7 +66,7 @@ export default function Game() {
       {actualQuestion && questions ? (
         isResultPage ? (
           <Answer
-            choice={choice!}
+            answerUser={actualAnswerUser}
             img={
               process.env.NEXT_PUBLIC_API_URL_IMAGE +
               `${actualQuestion.imageUrl}`
@@ -104,8 +81,6 @@ export default function Game() {
               `${actualQuestion.imageUrl}`
             }
             question={actualQuestion!.title}
-            leftChoice={actualQuestion.choices[0]}
-            rightChoice={actualQuestion.choices[1]}
             onChoice={onChoice}
           />
         )

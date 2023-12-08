@@ -4,21 +4,16 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Choice from "./Choice";
 import TinderCard from "react-tinder-card";
-import { Choice as ChoiceModel } from "../models/choice";
 
 export interface QuestionProps {
   img: string;
   question: string;
-  leftChoice: ChoiceModel;
-  rightChoice: ChoiceModel;
-  onChoice: (choice: ChoiceModel) => void;
+  onChoice: (answer: boolean) => void;
 }
 
 export default function Question({
   img,
   question,
-  leftChoice,
-  rightChoice,
   onChoice,
 }: QuestionProps) {
   const LEFT_SWIPE = "left";
@@ -31,8 +26,8 @@ export default function Question({
   };
 
   const onSwipe = (direction: any) => {
-    if (direction === LEFT_SWIPE) onChoice(leftChoice);
-    else if (direction === RIGHT_SWIPE) onChoice(rightChoice);
+    if (direction === LEFT_SWIPE) onChoice(true);
+    else if (direction === RIGHT_SWIPE) onChoice(false);
   };
 
   useEffect(() => {
@@ -49,9 +44,9 @@ export default function Question({
         // Render layout for screens larger than 1024px
         <div className="self-center flex flex-row items-center gap-10">
           <Choice
-            text={leftChoice.text}
+            text="Vrai"
             img="/left-arrow.svg"
-            click={() => onChoice(leftChoice)}
+            click={() => onChoice(true)}
           />
           <div>
             <TinderCard
@@ -66,8 +61,8 @@ export default function Question({
             </TinderCard>
           </div>
           <Choice
-            text={rightChoice.text}
-            click={() => onChoice(rightChoice)}
+            text="Faux"
+            click={() => onChoice(false)}
             img="/right-arrow.svg"
           />
         </div>
@@ -76,13 +71,13 @@ export default function Question({
         <div className="self-center flex flex-col items-center gap-4">
           <div className="flex justify-around">
             <Choice
-              text={leftChoice.text}
-              click={() => onChoice(leftChoice)}
+              text="Vrai"
+              click={() => onChoice(true)}
               img="/left-arrow.svg"
             />
             <Choice
-              text={rightChoice.text}
-              click={() => onChoice(rightChoice)}
+              text="Faux"
+              click={() => onChoice(false)}
               img="/right-arrow.svg"
             />
           </div>

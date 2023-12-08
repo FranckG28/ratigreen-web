@@ -1,7 +1,7 @@
 "use server";
 
 import Link from "next/link";
-import { Question } from "../models/question";
+import { Question } from "../models/question.model";
 import ActionQuestion from "./components/ActionQuestion";
 import Image from "next/image";
 
@@ -47,22 +47,6 @@ export default async function Admin() {
               width={50}
               height={50}
             />
-            {question.choices.map((choice, index) => (
-              <div key={index} className="p-2 border rounded shadow mb-2">
-                <p className="font-medium">{choice.text}</p>
-                {choice.indicatorCoefficients.map((ic, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-start items-center mt-1 gap-3"
-                  >
-                    <p className="text-sm bg-blue-200 rounded px-2">
-                      {ic.coefficient}
-                    </p>
-                    <p className="text-sm">{ic.indicator}</p>
-                  </div>
-                ))}
-              </div>
-            ))}
           </div>
         ))}
       </div>
