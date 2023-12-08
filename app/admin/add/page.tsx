@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  addImageQuestionAction,
-} from "@/app/actions/add-question.action";
 import React, { useRef, useState } from "react";
-import ChoiceInput from "../components/ChoiceInput";
 import { toast } from "@/app/components/Toast";
 import FileInput from "../components/FileInput";
 import Link from "next/link";
@@ -75,20 +71,6 @@ export default function CreateQuestion() {
             imagePreviewUrl={imagePreviewUrl}
           />
         </div>
-
-        <ChoiceInput
-          indexChoice={0}
-          isAnswer={isAnswerFirstChoice}
-          onRadioClickIsAnswer={onAnswerFirstChoice}
-          choiceTitle="Premier choix"
-        />
-
-        <ChoiceInput
-          indexChoice={1}
-          isAnswer={!isAnswerFirstChoice}
-          onRadioClickIsAnswer={onAnswerFirstChoice}
-          choiceTitle="Second choix"
-        />
       </section>
     </form>
   );
