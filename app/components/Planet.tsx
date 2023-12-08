@@ -2,11 +2,11 @@
 "use client";
 
 import createGlobe from "cobe";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from '../../tailwind.config.ts'
 import { ThemeContext } from "../providers/ThemeProvider";
 import daisyuiColors from "daisyui/src/theming/themes";
+import { Theme } from "daisyui";
 
 function normalizeOKLCHArray(oklchArray: number[]) {
     // Define the minimum and maximum values for each component
@@ -24,7 +24,7 @@ function normalizeOKLCHArray(oklchArray: number[]) {
 
 function convertColor(theme: string, which: string) {
     var parse = require('color-parse')
-    const parsed_value = parse.default(daisyuiColors[theme][which]);
+    const parsed_value = parse.default(daisyuiColors[theme as Theme][which]);
     console.log(parsed_value);
     if (parsed_value.space == "oklch") {
         return normalizeOKLCHArray(parsed_value.values);
@@ -34,10 +34,9 @@ function convertColor(theme: string, which: string) {
 }
 
 export default function Planet() {
-    const canvasRef = useRef();
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const width = 700;
     const height = 700;
-    const fullConfig = resolveConfig(tailwindConfig)
 
     const { theme } = useContext(ThemeContext);
 
@@ -47,7 +46,7 @@ export default function Planet() {
         const base = convertColor(theme, "primary");
         const glow = convertColor(theme, "accent")
 
-        const globe = createGlobe(canvasRef.current, {
+        const globe = createGlobe(canvasRef.current!, {
             devicePixelRatio: 2,
             width: width * 2,
             height: height * 2,
@@ -57,9 +56,9 @@ export default function Planet() {
             diffuse: 1.2,
             mapSamples: 16000,
             mapBrightness: 100,
-            baseColor: glow,
+            baseColor: [glow[0], glow[1], glow[2]],
             markerColor: [0.1, 0.8, 1],
-            glowColor: base,
+            glowColor: [base[0], base[1], base[2]],
             markers: [
                 // longitude latitude
                 // { location: [37.7595, -122.4367], size: 0.03 },
