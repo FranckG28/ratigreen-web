@@ -4,7 +4,7 @@ import ProgressBar from "./ProgressBar";
 import { Question } from "../models/question.model";
 export interface ResultProps {
   img: string;
-  answerUser: string;
+  answerUser: boolean;
   question: Question;
   nextQuestion: () => void;
 }
@@ -49,7 +49,7 @@ export default function Answer({
             Effets sur vos indicateurs
           </h2>
           <div className="mt-2 flex gap-12">
-              <p>ICI METTRE LA TERRE ?</p>
+            <p>ICI METTRE LA TERRE ?</p>
           </div>
         </div>
         <div>
@@ -71,7 +71,7 @@ export default function Answer({
         </h1>
         <div className="flex flex-col bg-white rounded-xl h-3/4 justify-center shadow shadow-primary/50">
           <div className="flex flex-row gap-10 items-center grow justify-center">
-            <p className="text-primary-content text-lg font-bold text-center p-10">
+            <div className="text-primary-content text-lg font-bold text-center p-10">
               {question.datas.map((data) => {
                 return (
                   <div key={data.id}>
@@ -81,10 +81,7 @@ export default function Answer({
                   </div>
                 );
               })}
-            </p>
-            <p className="text-primary-content text-lg font-bold text-center p-10">
-
-            </p>
+            </div>
           </div>
         </div>
         <button
