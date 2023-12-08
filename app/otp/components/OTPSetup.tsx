@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import CodeInput from "./CodeInput";
+
 export default function OTPSetup() {
   return (
     <div className="flex flex-col gap-2">
@@ -26,7 +31,9 @@ export default function OTPSetup() {
             authentification sur votre compte
           </p>
         </div>
-        <div className="h-32 w-32 bg-primary rounded-md"></div>
+        <div className="self-center">
+          <CodeInput onOtpSet={(otp) => console.log("otp", otp)} />
+        </div>
       </div>
 
       <div className="flex justify-between">
