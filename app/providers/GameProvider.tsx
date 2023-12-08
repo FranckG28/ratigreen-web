@@ -40,13 +40,11 @@ export default function GameProvider({
     "forest",
     "halloween",
     "aqua",
-    "lofi",
-    "autumn",
+    "synthwave",
     "business",
-    "acid",
+    "cyberpunk",
     "night",
     "coffee",
-    "winter",
   ];
 
   useEffect(() => {
