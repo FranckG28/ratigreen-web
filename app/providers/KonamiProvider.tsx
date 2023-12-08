@@ -16,13 +16,6 @@ export default function KonamiProvider({
     children: React.ReactNode;
 }) {
     const konami = useKonamiCode();
-
-    useEffect(() => {
-        if (konami) {
-            /* TODO: put sound */
-        }
-    }, [konami]);
-
     return (
         <KonaContext.Provider
             value={{

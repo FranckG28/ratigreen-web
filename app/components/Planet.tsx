@@ -6,6 +6,11 @@ import { useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "../providers/ThemeProvider";
 import daisyuiColors from "daisyui/src/theming/themes";
 import { Theme } from "daisyui";
+import ratGIF from "@/public/funny-rat-funny.gif"
+import Image from 'next/image';
+import { toast } from "@/app/components/Toast"
+import { KonaContext } from "../providers/KonamiProvider";
+
 
 function normalizeOKLCHArray(oklchArray: number[]) {
     // Define the minimum and maximum values for each component
@@ -38,6 +43,18 @@ export default function Planet() {
     const height = 700;
 
     const { theme } = useContext(ThemeContext);
+    const { konami } = useContext(KonaContext);
+
+
+    useEffect(() => {
+        if (konami) {
+            const audio = document.querySelector("audio");
+            audio!.addEventListener('ended', () => {
+                toast.success("Bravo, vous avez effectué le Konami Code !");
+            });
+
+        }
+    }, [konami])
 
     useEffect(() => {
         let phi = 0;
@@ -78,6 +95,14 @@ export default function Planet() {
 
     return (
         <div>
+            {konami ?
+                <Image className="absolute" src={ratGIF} alt="my gif" height={600} width={500} />
+                : null}
+            {konami ?
+                <audio autoPlay>
+                    <source src={"RAT_VERT.mp3"} type="audio/mp3" />
+                </audio>
+                : null}
             <canvas
                 ref={canvasRef}
                 style={{ width: width, height: height, maxWidth: "100%", aspectRatio: 1 }}
