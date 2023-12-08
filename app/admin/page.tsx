@@ -5,19 +5,19 @@ import { Question } from "../models/question.model";
 import ActionQuestion from "./components/ActionQuestion";
 import Image from "next/image";
 
-async function getData(): Promise<Question[]> {
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "questions");
+// async function getData(): Promise<Question[]> {
+//   const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "questions");
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return (await res.json()) as Question[];
-  //return data.map(mapQuestion);
-}
+//   return (await res.json()) as Question[];
+//   //return data.map(mapQuestion);
+// }
 
 export default async function Admin() {
-  const questions = await getData();
+  const questions = [] as Question[];
 
   return (
     <>
