@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import ChristmanGiftAnimation from "./CallToLoginAnimation";
 

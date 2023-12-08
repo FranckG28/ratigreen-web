@@ -38,7 +38,6 @@ export default function Home() {
             </Link>
           </div>
         </CallToLogin>
-
         <ThemeChanger />
       </div>
       <Planet />
