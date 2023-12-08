@@ -26,19 +26,6 @@ export default function Card({ text, img }: CardProps) {
           {text}
         </p>
       </div>
-      <Image
-        className="self-end m-2"
-        style={{
-          pointerEvents: "none",
-          userSelect: "none",
-          width: 100,
-          height: 30,
-        }}
-        src="/ratisexe-dard.svg"
-        alt="Hey"
-        width={100}
-        height={30}
-      ></Image>
     </div>
   );
 }
