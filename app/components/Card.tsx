@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Ratilogo from "./Ratilogo";
 
 export interface CardProps {
   text: string;
@@ -26,7 +27,7 @@ export default function Card({ text, img }: CardProps) {
           {text}
         </p>
       </div>
-      <Image
+      {/* <Image
         className="self-end m-2"
         style={{
           pointerEvents: "none",
@@ -38,7 +39,8 @@ export default function Card({ text, img }: CardProps) {
         alt="Hey"
         width={100}
         height={30}
-      ></Image>
+      ></Image> */}
+      <Ratilogo size="sm" />
     </div>
   );
 }
