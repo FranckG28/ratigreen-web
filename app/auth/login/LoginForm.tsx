@@ -13,15 +13,15 @@ export default function LoginForm() {
       action={formAction}
     >
       <input
-        type="text"
         name="email"
+        type="email"
         placeholder="Email"
         className="input input-bordered w-full"
         required
       />
       <input
-        type="text"
         name="password"
+        type="password"
         placeholder="Mot de passe"
         className="input input-bordered w-full"
         required

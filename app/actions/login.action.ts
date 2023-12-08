@@ -1,5 +1,9 @@
 'use server'
 
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { decodeBase64 } from "../utility/base64";
+
 export async function login(prevState: any, formData: FormData) {
 
     try {
@@ -10,16 +14,30 @@ export async function login(prevState: any, formData: FormData) {
             return { message: "Veuillez remplir tous les champs" }
         }
 
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                password,
+            }),
+        });
+
+        
+        const accessToken = (await res.json()).accessToken;
+
+        if(!accessToken) {
+            throw Error("No access token")
+        }
+
+        cookies().set('access_token', accessToken)
+
+        const decodedAccessToken = decodeBase64(accessToken);
     } catch (error) {
         console.log(error);
         return { message: "Une erreur est survenue" }
     }
-
-    // const res = await fetch("/auth/login", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //         email: formData.get("email"),
-    //         password: formData.get("password"),
-    //     }),
-    // });
+    redirect("/");
 }
