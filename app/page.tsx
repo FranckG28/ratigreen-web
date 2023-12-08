@@ -5,10 +5,12 @@ import Ratilogo from "./components/Ratilogo";
 import Balancer from "react-wrap-balancer";
 import CallToLogin from "./components/CallToLogin";
 import { ArrowRight, HelpCircle } from "lucide-react";
+import Planet from "./components/Planet";
 
 export default function Home() {
+  {/* gap-x needs to updated */ }
   return (
-    <Container className="flex-col gap-6 items-center grid xl:grid-cols-2">
+    < Container className="flex-col gap-6 gap-x-48 items-center grid xl:grid-cols-2" >
       <div className="flex flex-col justify-start gap-3">
         <Ratilogo size="lg" />
 
@@ -38,7 +40,7 @@ export default function Home() {
         </CallToLogin>
         <ThemeChanger />
       </div>
-      <div className="">{/* todo insert planet */}</div>
-    </Container>
+      <Planet />
+    </Container >
   );
 }
