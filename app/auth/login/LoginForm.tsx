@@ -26,7 +26,7 @@ export default function LoginForm() {
         className="input input-bordered w-full"
         required
       />
-      {state.message == "missingOTP" ? (
+      {state?.message == "missingOTP" ? (
         <input
           name="otp"
           type="text"
