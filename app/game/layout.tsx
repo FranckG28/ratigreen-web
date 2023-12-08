@@ -8,7 +8,7 @@ import { getQuestions } from "./get-questions.action";
 async function fetchQuestions(): Promise<QuestionModel[]> {
   const questions = await getQuestions();
   // randomize questions order
-  questions.sort(() => Math.random() - 0.5);
+  //questions.sort(() => Math.random() - 0.5);
   return questions;
 }
 
