@@ -69,7 +69,7 @@ export default function Game() {
             answerUser={actualAnswerUser}
             img={
               process.env.NEXT_PUBLIC_API_URL_IMAGE +
-              `${actualQuestion.imageUrl}`
+              `/${actualQuestion.imageUrl}`
             }
             question={actualQuestion}
             nextQuestion={nextQuestion}
@@ -78,7 +78,7 @@ export default function Game() {
           <Question
             img={
               process.env.NEXT_PUBLIC_API_URL_IMAGE +
-              `${actualQuestion.imageUrl}`
+              `/${actualQuestion.imageUrl}`
             }
             question={actualQuestion!.title}
             onChoice={onChoice}
