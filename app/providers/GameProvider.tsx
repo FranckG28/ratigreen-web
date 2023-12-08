@@ -28,8 +28,6 @@ export default function GameProvider({
   children: React.ReactNode;
   questions: QuestionModel[];
 }) {
-  console.log("got questions ", questions);
-
   const [points, setPoints] = useState<number>(0);
   const [actualQuestion, setActualQuestion] = useState<number>(0);
   const [lastAnswer, setLastAnwser] = useState<boolean>(false);

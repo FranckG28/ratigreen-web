@@ -35,7 +35,7 @@ export async function login(prevState: any, formData: FormData) {
 
         cookies().set(JWT_access_token_cookie, accessToken)
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return { message: "Une erreur est survenue" }
     }
     redirect("/");

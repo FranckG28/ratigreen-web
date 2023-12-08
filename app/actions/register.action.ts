@@ -18,7 +18,6 @@ export async function register(prevData: any, formData: FormData) {
             return { message: "Les mots de passe ne correspondent pas" }
         }
 
-        console.log(`${process.env.NEXT_PUBLIC_API_URL}auth/register`)
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/register`, {
             cache: 'no-store',
             method: "POST",
