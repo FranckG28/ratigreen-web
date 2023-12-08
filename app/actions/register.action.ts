@@ -18,7 +18,7 @@ export async function register(prevData: any, formData: FormData) {
             return { message: "Les mots de passe ne correspondent pas" }
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/register`, {
+        const res = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/register`, {
             cache: 'no-store',
             method: "POST",
             headers: {
@@ -29,7 +29,13 @@ export async function register(prevData: any, formData: FormData) {
                 email,
                 password,
             }),
-        });
+        })).json();
+
+        console.log("res", res)
+
+        if(res.statusCode === 400) {
+            return { message: res.message }
+        }
     } catch (error) {
         return { message: "Une erreur est survenue : " + error }
     }

@@ -45,6 +45,10 @@ export async function login(prevState: any, formData: FormData) {
 
     console.log("res", res)
 
+    if(res.statusCode === 401) {
+        return { message: res.message }
+    }
+
     if(!res.tokens) {
         return { message: "Email ou mot de passe incorrect" }
     }
@@ -58,6 +62,7 @@ export async function login(prevState: any, formData: FormData) {
 
     if(user.isTwoFAEnabled) {
         if(!formData.get("otp")) {
+            console.log("hlaaaaaa")
             return { message: "missingOTP"}
         }
         if(formData.get("otp") && res.tokens.accessToken){
