@@ -50,16 +50,39 @@ export default function Answer({
             <p className="font-bold text-2xl">Faux</p>
           )}
         </div>
-        <div>
-          <h2 className="opacity-60 font-bold text-lg uppercase">
-            Les données
-          </h2>
-          <h3 className="font-bold ">
-            {question.datas[0].value}</h3>
-          <h3 className="font-bold ">
-            {question.datas[0].answer}</h3><br/>
-            <p className="text text">
-            {question.datas[0].explanation}</p>
+        <div className="flex flex-row">
+          <div>
+            <h2 className="opacity-60 font-bold text-lg uppercase">
+              Les données
+            </h2>
+            <h3 className="font-bold ">
+              {question.datas[0].answer}</h3><br />
+            <p className="text text mb-4">
+              {question.datas[0].explanation}
+            </p>
+            <div>
+              {question.sources.length > 0 ? (
+                <div>
+                  <h2 className="opacity-60 font-bold text-lg uppercase">
+                    Sources
+                  </h2>
+                  {question.sources.map((source, index) => (
+                    <a
+                      key={index}
+                      href={source.link!}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <p className="text-white underline">{source.name}</p>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+
+          </div>
         </div>
         <Message question={question} />
       </div>
@@ -69,7 +92,7 @@ export default function Answer({
           La terre
         </h1>
         <Planet />
-        
+
         <button
           type="button"
           className="btn btn-primary self-end"
