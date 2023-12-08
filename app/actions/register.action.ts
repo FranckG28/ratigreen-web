@@ -1,7 +1,10 @@
+'use server'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation';
+
 export async function register(prevData: any, formData: FormData) {
 
     try {
-
         const name = formData.get("name");
         const email = formData.get("email");
         const password = formData.get("password");
@@ -15,12 +18,21 @@ export async function register(prevData: any, formData: FormData) {
             return { message: "Les mots de passe ne correspondent pas" }
         }
 
-        return { message: "Ok" }
-
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/register`, {
+            cache: 'no-store',
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+            }),
+        });
     } catch (error) {
-        console.log(error);
-        return { message: "Une erreur est survenue" }
+        return { message: "Une erreur est survenue : " + error }
     }
-    // todo register
 
+    redirect(`/auth/login`)
 }

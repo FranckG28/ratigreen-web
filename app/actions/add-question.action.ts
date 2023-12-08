@@ -35,7 +35,6 @@ import { redirect } from "next/navigation";
 //    //        console.error("Error parsing JSON: ", e);
 //    //    }
 //    //    console.error(JSON.stringify(errorData, null, 2));
-//    //    console.log("HTTP-Error: " + response.status);
 //    //}
 //
 //    // Revalidate cache when we will refresh the page /admin

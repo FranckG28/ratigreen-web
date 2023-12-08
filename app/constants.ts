@@ -1,0 +1,1 @@
+export const JWT_access_token_cookie = "access_token";
