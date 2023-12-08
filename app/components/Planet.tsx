@@ -3,7 +3,6 @@
 
 import createGlobe from "cobe";
 import { useContext, useEffect, useRef } from "react";
-import resolveConfig from 'tailwindcss/resolveConfig'
 import { ThemeContext } from "../providers/ThemeProvider";
 import daisyuiColors from "daisyui/src/theming/themes";
 import { Theme } from "daisyui";
