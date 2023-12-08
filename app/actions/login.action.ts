@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { decodeBase64 } from "../utility/base64";
+import { JWT_access_token_cookie } from "../constants";
 
 export async function login(prevState: any, formData: FormData) {
 
@@ -33,7 +33,7 @@ export async function login(prevState: any, formData: FormData) {
             throw Error("No access token")
         }
 
-        cookies().set('access_token', accessToken)
+        cookies().set(JWT_access_token_cookie, accessToken)
     } catch (error) {
         console.log(error);
         return { message: "Une erreur est survenue" }
