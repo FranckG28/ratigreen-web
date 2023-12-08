@@ -16,9 +16,6 @@ export async function Otp(prevState: any, formData: FormData) {
         return { message: "Veuillez remplir tous les champs" }
     }
 
-    console.log("change otp tokenjwt", token)
-
-
     const res = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/two-fa/change`, {
         cache: 'no-store',
         method: "POST",

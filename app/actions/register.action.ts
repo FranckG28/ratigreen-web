@@ -31,8 +31,6 @@ export async function register(prevData: any, formData: FormData) {
             }),
         })).json();
 
-        console.log("res", res)
-
         if(res.statusCode === 400) {
             return { message: res.message }
         }

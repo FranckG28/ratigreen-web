@@ -43,8 +43,6 @@ export async function login(prevState: any, formData: FormData) {
         })).json();
     }
 
-    console.log("res", res)
-
     if(res.statusCode === 401) {
         return { message: res.message }
     }
@@ -62,7 +60,6 @@ export async function login(prevState: any, formData: FormData) {
 
     if(user.isTwoFAEnabled) {
         if(!formData.get("otp")) {
-            console.log("hlaaaaaa")
             return { message: "missingOTP"}
         }
         if(formData.get("otp") && res.tokens.accessToken){
