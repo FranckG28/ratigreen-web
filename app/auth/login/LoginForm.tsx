@@ -26,8 +26,19 @@ export default function LoginForm() {
         className="input input-bordered w-full"
         required
       />
+      {state?.message == "missingOTP" ? (
+        <input
+          name="otp"
+          type="text"
+          placeholder="OTP Code"
+          className="input input-bordered w-full"
+          required
+        />
+      ) : null}
       <p aria-live="polite" className="text-error">
-        {state?.message}
+        {state?.message === "missingOTP"
+          ? "Veuillez ajouter votre code OTP"
+          : state?.message}
       </p>
       <SubmitButton>Se connecter</SubmitButton>
     </form>

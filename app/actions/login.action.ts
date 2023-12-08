@@ -6,15 +6,18 @@ import { JWT_access_token_cookie } from "../constants";
 
 export async function login(prevState: any, formData: FormData) {
 
-    try {
-        const email = formData.get("email");
-        const password = formData.get("password");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const otp = formData.get("otp")
 
-        if (!email || !password) {
-            return { message: "Veuillez remplir tous les champs" }
-        }
+    if (!email || !password) {
+        return { message: "Veuillez remplir tous les champs" }
+    }
 
-        const res = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
+    let res = null;
+
+    if(!otp) {
+        res = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
             cache: 'no-store',
             method: "POST",
             headers: {
@@ -25,18 +28,44 @@ export async function login(prevState: any, formData: FormData) {
                 password,
             }),
         })).json();
-
-        const accessToken = res.tokens.accessToken;
-        const user = res.user;
-
-        if(!accessToken) {
-            throw Error("No access token")
-        }
-
-        cookies().set(JWT_access_token_cookie, accessToken)
-    } catch (error) {
-        console.error(error);
-        return { message: "Une erreur est survenue" }
+    } else {
+        res = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/two-fa/authenticate`, {
+            cache: 'no-store',
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                twoFaCode: otp,
+            }),
+        })).json();
     }
-    redirect("/");
+
+    console.log("res", res)
+
+    if(!res.tokens) {
+        return { message: "Email ou mot de passe incorrect" }
+    }
+
+    const accessToken = res.tokens.accessToken;
+    const user = res.user;
+
+    if(!accessToken && !user.isTwoFAEnabled) {
+        throw Error("No access token")
+    }
+
+    if(user.isTwoFAEnabled) {
+        if(!formData.get("otp")) {
+            return { message: "missingOTP"}
+        }
+        if(formData.get("otp") && res.tokens.accessToken){
+            cookies().set(JWT_access_token_cookie, accessToken)
+            redirect("/")
+        }
+    } else {
+        cookies().set(JWT_access_token_cookie, accessToken)
+        redirect("/auth/ask2FA");
+    }
 }
