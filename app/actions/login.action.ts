@@ -14,7 +14,8 @@ export async function login(prevState: any, formData: FormData) {
             return { message: "Veuillez remplir tous les champs" }
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
+        const res = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
+            cache: 'no-store',
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -23,18 +24,16 @@ export async function login(prevState: any, formData: FormData) {
                 email,
                 password,
             }),
-        });
+        })).json();
 
-        
-        const accessToken = (await res.json()).accessToken;
+        const accessToken = res.tokens.accessToken;
+        const user = res.user;
 
         if(!accessToken) {
             throw Error("No access token")
         }
 
         cookies().set('access_token', accessToken)
-
-        const decodedAccessToken = decodeBase64(accessToken);
     } catch (error) {
         console.log(error);
         return { message: "Une erreur est survenue" }
