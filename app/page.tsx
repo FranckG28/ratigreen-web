@@ -31,14 +31,13 @@ export default function Home() {
         <CallToLogin>
           <div className="flex gap-2 items-center">
             <Link className="btn btn-secondary" href="/auth/register">
-              S'inscrire
+              S&apos;inscrire
             </Link>
             <Link className="btn btn-ghost" href="/auth/login">
               Se connecter
             </Link>
           </div>
         </CallToLogin>
-
         <ThemeChanger />
       </div>
       <Planet />

@@ -9,8 +9,8 @@ interface ThemeContextInterface {
 }
 
 export const ThemeContext = createContext<ThemeContextInterface>({
-  theme: "black",
-  setTheme: () => {},
+  theme: "forest",
+  setTheme: () => { },
 });
 
 export default function ThemeController({

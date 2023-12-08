@@ -7,6 +7,7 @@ import { appName, appUrl, description } from "./manifest";
 import ThemeController from "./providers/ThemeProvider";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import KonamiProvider from "./providers/KonamiProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,11 +52,13 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
-        <ThemeController>
-          <Navbar />
-          <div className="pb-24 pt-24">{children}</div>
-          <Footer />
-        </ThemeController>
+        <KonamiProvider>
+          <ThemeController>
+            <Navbar />
+            <div className="pb-24 pt-24">{children}</div>
+            <Footer />
+          </ThemeController>
+        </KonamiProvider>
         <ToastContainer />
       </body>
     </html>

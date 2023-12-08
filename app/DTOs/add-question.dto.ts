@@ -1,18 +1,19 @@
-import { Indicator } from "../models/indicator";
 
-export type IndicatorCoefficientDto = {
-    indicator: Indicator;
-    coefficient: number;
-  }
-  
-export type ChoiceDto = {
-    text: string;
-    indicatorCoefficients: IndicatorCoefficientDto[];
+export type SourceDto = {
+    name: string;
+    link: string | null;
+}
+
+export type Data = {
+    answer: string;
+    value: number;
+    explanation: string;
 }
 
 export type QuestionDto = {
     title: string;
-    answer: string;
-    choices: ChoiceDto[];
+    answer: boolean;
+    sources: SourceDto[];
+    datas: Data[];
 }
   

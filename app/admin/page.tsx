@@ -1,23 +1,23 @@
 "use server";
 
 import Link from "next/link";
-import { Question } from "../models/question";
+import { Question } from "../models/question.model";
 import ActionQuestion from "./components/ActionQuestion";
 import Image from "next/image";
 
-async function getData(): Promise<Question[]> {
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "questions");
+// async function getData(): Promise<Question[]> {
+//   const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "questions");
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return (await res.json()) as Question[];
-  //return data.map(mapQuestion);
-}
+//   return (await res.json()) as Question[];
+//   //return data.map(mapQuestion);
+// }
 
 export default async function Admin() {
-  const questions = await getData();
+  const questions = [] as Question[];
 
   return (
     <>
@@ -47,22 +47,6 @@ export default async function Admin() {
               width={50}
               height={50}
             />
-            {question.choices.map((choice, index) => (
-              <div key={index} className="p-2 border rounded shadow mb-2">
-                <p className="font-medium">{choice.text}</p>
-                {choice.indicatorCoefficients.map((ic, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-start items-center mt-1 gap-3"
-                  >
-                    <p className="text-sm bg-blue-200 rounded px-2">
-                      {ic.coefficient}
-                    </p>
-                    <p className="text-sm">{ic.indicator}</p>
-                  </div>
-                ))}
-              </div>
-            ))}
           </div>
         ))}
       </div>

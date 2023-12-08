@@ -9,7 +9,7 @@ export default function RegisterForm() {
 
   return (
     <form
-      className="flex flex-col gap-2 card bg-base-200 shadow-xl p-6 w-full max-w-sm"
+      className="flex flex-col gap-2 w-full max-w-sm py-6"
       action={formAction}
     >
       <input
@@ -39,7 +39,7 @@ export default function RegisterForm() {
       <p aria-live="polite" className="text-error">
         {state?.message}
       </p>
-      <SubmitButton>S'inscrire</SubmitButton>
+      <SubmitButton>S&apos;inscrire</SubmitButton>
     </form>
   );
 }
