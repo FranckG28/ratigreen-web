@@ -23,8 +23,6 @@ export default async function Enable2FA() {
     })
   ).json();
 
-  console.log("generate qr code token:", token);
-
   return (
     <Container className="grid lg:grid-cols-2 items-center">
       <div>

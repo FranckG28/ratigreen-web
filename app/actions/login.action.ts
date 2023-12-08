@@ -43,7 +43,9 @@ export async function login(prevState: any, formData: FormData) {
         })).json();
     }
 
-    console.log("res", res)
+    if(res.statusCode === 401) {
+        return { message: res.message }
+    }
 
     if(!res.tokens) {
         return { message: "Email ou mot de passe incorrect" }
