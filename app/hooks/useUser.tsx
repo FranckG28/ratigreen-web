@@ -1,13 +1,8 @@
-import { cookies } from "next/headers";
-import { JWT_access_token_cookie } from "../constants";
 import { PublicUser } from "../models/public-user";
+import { useJwtToken } from "./useJwtToken";
 
 export const useUser = async () => {
-  const token = cookies().get(JWT_access_token_cookie)?.value;
-
-  if (!token) {
-    return null;
-  }
+  const token = useJwtToken();
 
   const res = await fetch(`${process.env.API_URL}users/profile`, {
     method: "GET",
