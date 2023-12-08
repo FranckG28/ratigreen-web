@@ -7,15 +7,15 @@ export default function OTPSetup() {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-lg font-bold">
-        Configurer l'authentification à deux facteurs
+        Configurer l&apos;authentification à deux facteurs
       </h3>
 
       <div className="grid lg:grid-cols-2">
         <div className="">
           <h5 className="text-lg font-bold">Étape 1</h5>
           <p>
-            Utilisez une application d'authentification sur à deux facteurs sur
-            votre smartphone. (exemple: Google Authentificator ou Microsoft
+            Utilisez une application d&apos;authentification sur à deux facteurs
+            sur votre smartphone. (exemple: Google Authentificator ou Microsoft
             Authentificator) pour scanner le QR-code
           </p>
         </div>
@@ -26,8 +26,8 @@ export default function OTPSetup() {
         <div className="">
           <h5 className="text-lg font-bold">Étape 2</h5>
           <p>
-            Entrez le code d'authentification à double facteur généré par
-            l'application pour confirmer l'activation de la double
+            Entrez le code d&apos;authentification à double facteur généré par
+            l&apos;application pour confirmer l&apos;activation de la double
             authentification sur votre compte
           </p>
         </div>
