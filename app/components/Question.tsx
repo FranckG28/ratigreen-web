@@ -39,7 +39,7 @@ export default function Question({
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col gap-12">
       {windowWidth > 768 ? (
         // Render layout for screens larger than 1024px
         <div className="self-center flex flex-row items-center gap-10">
@@ -91,6 +91,6 @@ export default function Question({
         {" "}
         Swipez ou cliquez pour faire votre choix !
       </p>
-    </>
+    </div>
   );
 }

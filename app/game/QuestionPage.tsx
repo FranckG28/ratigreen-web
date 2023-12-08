@@ -5,7 +5,7 @@ import { GameContext } from "../providers/GameProvider";
 import Question from "../components/Question";
 import { goToResult } from "./go-to-results.action";
 
-export default function QuestionPage({}: {}) {
+export default function QuestionPage({ }: {}) {
   const {
     questions,
     actualQuestion,
