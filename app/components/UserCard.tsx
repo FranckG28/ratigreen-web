@@ -39,7 +39,7 @@ export default function UserCard() {
           <summary>Se connecter</summary>
           <ul className="p-2 bg-base-100 rounded-t-none">
             <li>
-              <Link href="/auth/register">S'inscrire</Link>
+              <Link href="/auth/register">S&apos;inscrire</Link>
             </li>
             <li>
               <Link href="/auth/login">Se connecter</Link>

@@ -1,4 +1,3 @@
-import { Indicator } from '@/app/models/indicator';
 import React from 'react'
 import Image from 'next/image';
 import { getIndicatorImage } from '@/app/utility/indicator-image-path';
@@ -23,21 +22,7 @@ export default function ChoiceInput({ indexChoice, isAnswer, onRadioClickIsAnswe
         <div>
           <h2 className='text-lg opacity-80 font-bold uppercase'>Effets sur les indicateurs</h2>
           <div className='mt-2 flex lg:gap-12 flex-col lg:flex-row'>
-            {Object.values(Indicator).map((indicator, index) => {
-                return (
-                  <div className='flex gap-2' key={index}>
-                    <Image src={getIndicatorImage(indicator)} alt="Arrow" width={30} height={30} style={{width: 30, height: 30}}></Image>
-                    <input 
-                      type='number' 
-                      min="-100"
-                      max="100"
-                      defaultValue="0"
-                      name={`choices[${indexChoice}].indicator[${index}]`}
-                      className='font-bold text-2xl border-2 rounded-lg lg:w-full bg-transparent lg:text-center border-transparent'
-                    />
-                  </div>
-                );
-              })}
+            
           </div>
         </div>
 
