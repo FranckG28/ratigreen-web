@@ -12,7 +12,9 @@ export default function Footer() {
           </p>
         </Link>
       </aside>
-      <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end"></nav>
+      <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <p>Connaisez vous le Konami Code ? Ouvrez grand les oreilles ;)</p>
+      </nav>
     </footer>
   );
 }
