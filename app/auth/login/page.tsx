@@ -10,8 +10,8 @@ export default function LoginPage() {
         <h1 className="text-4xl font-medium tracking-tight">Se connecter</h1>
         <LoginForm />
         <p className="text-base-content">
-          Vous n'avez pas encore de compte ?{" "}
-          <Link href={"/auth/register"}>S'inscrire</Link>
+          Vous n&apos;avez pas encore de compte ?{" "}
+          <Link href={"/auth/register"}>S&apos;inscrire</Link>
         </p>
       </div>
 
