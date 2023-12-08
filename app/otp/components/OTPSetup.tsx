@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import CodeInput from "./CodeInput";
 
 export default function OTPSetup() {
