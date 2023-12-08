@@ -12,15 +12,16 @@ export const addMessageAction = async (formData: FormData, questionId: number) =
 
     const text = formData.get('text');
 
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions/' + questionId + '/message', 
+    const response = await (await fetch(process.env.NEXT_PUBLIC_API_URL + 'questions/' + questionId + '/message', 
     {
+        cache: 'no-cache',
         method: 'POST',
-        body:  text,
+        body:  JSON.stringify({ text }),
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
-    }); 
+    })).json(); 
 
-    return { status: response.status, text: await response.text() };
+    return { status: response.status, text: response.text };
 }
