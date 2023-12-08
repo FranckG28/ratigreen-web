@@ -1,22 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import IndicatorResult from "./IndicatorResult";
 import ProgressBar from "./ProgressBar";
-import { Question } from "../models/question";
-import { Choice } from "../models/choice";
-import { getIndicatorImage } from "../utility/indicator-image-path";
-
+import { Question } from "../models/question.model";
 export interface ResultProps {
   img: string;
+  answerUser: string;
   question: Question;
-  choice: Choice;
   nextQuestion: () => void;
 }
 
 export default function Answer({
   img,
   question,
-  choice,
+  answerUser,
   nextQuestion,
 }: ResultProps) {
   return (
@@ -46,21 +42,14 @@ export default function Answer({
           <h2 className="opacity-60 font-bold text-lg uppercase">
             Vous avez choisis
           </h2>
-          <p className="font-bold text-1xl">{choice.text}</p>
+          <p className="font-bold text-1xl">{answerUser}</p>
         </div>
         <div>
           <h2 className="opacity-60 font-bold text-lg uppercase">
             Effets sur vos indicateurs
           </h2>
           <div className="mt-2 flex gap-12">
-            {choice.indicatorCoefficients.map((ic) => (
-              <IndicatorResult
-                key={ic.indicator}
-                img={getIndicatorImage(ic.indicator)}
-                symbol={ic.coefficient > 0 ? "+" : "-"}
-                value={Math.abs(ic.coefficient)}
-              />
-            ))}
+              <p>ICI METTRE LA TERRE ?</p>
           </div>
         </div>
         <div>
@@ -83,7 +72,18 @@ export default function Answer({
         <div className="flex flex-col bg-white rounded-xl h-3/4 justify-center shadow shadow-primary/50">
           <div className="flex flex-row gap-10 items-center grow justify-center">
             <p className="text-primary-content text-lg font-bold text-center p-10">
-              {question.answer}
+              {question.datas.map((data) => {
+                return (
+                  <div key={data.id}>
+                    <p>Value: {data.value}</p>
+                    <p>Answer: {data.answer}</p>
+                    <p>Explanation: {data.explanation}</p>
+                  </div>
+                );
+              })}
+            </p>
+            <p className="text-primary-content text-lg font-bold text-center p-10">
+
             </p>
           </div>
         </div>

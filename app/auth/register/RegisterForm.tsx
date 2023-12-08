@@ -39,7 +39,7 @@ export default function RegisterForm() {
       <p aria-live="polite" className="text-error">
         {state?.message}
       </p>
-      <SubmitButton>S'inscrire</SubmitButton>
+      <SubmitButton>S&apos;inscrire</SubmitButton>
     </form>
   );
 }
