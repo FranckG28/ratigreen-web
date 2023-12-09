@@ -19,7 +19,7 @@ const messagesMock = [
 
 export default function Message({ question }: { question: Question }) {
   return (
-    <div className="overflow-auto bg-white rounded-xl h-1/3 justify-center shadow shadow-primary/50">
+    <div className="overflow-auto bg-base-200 rounded-xl h-1/3 justify-center shadow-xl shadow-primary/10">
       <div className="text-primary-content text-lg font text-center p-10">
         <div className="chat chat-end">
           <div className="chat-bubble">

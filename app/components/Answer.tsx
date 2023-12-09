@@ -4,6 +4,7 @@ import { Question } from "../models/question.model";
 import Message from "./Message";
 import Balancer from "react-wrap-balancer";
 import Badge from "./Badge";
+import Card from "./Card";
 export interface ResultProps {
   img: string;
   answerUser: boolean;
@@ -16,22 +17,24 @@ export default function Answer({ img, question, answerUser }: ResultProps) {
     <div className="flex flex-col gap-8">
       <h1 className="opacity-60 font-bold text-2xl uppercase">Résultats</h1>
 
-      <div className="flex flex-row gap-6 p-4 bg-base-300 rounded-xl justify-start shadow-xl shadow-primary/10 items-center border border-primary/50">
-        <Image
-          style={{
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-          src={img}
-          alt="Hey"
-          width={100}
-          height={100}
-          className="rounded-xl aspect-square object-cover"
-        ></Image>
-        <p className="text-base-content text-lg font-bold text-left select-none">
-          {question.title}
-        </p>
-      </div>
+      <Card>
+        <div className="flex flex-row gap-6 p-4 justify-start items-center">
+          <Image
+            style={{
+              pointerEvents: "none",
+              userSelect: "none",
+            }}
+            src={img}
+            alt="Hey"
+            width={80}
+            height={80}
+            className="rounded-xl aspect-square object-cover"
+          ></Image>
+          <p className="text-base-content text-lg text-left select-none">
+            {question.title}
+          </p>
+        </div>
+      </Card>
 
       <div className="flex flex-col gap-4">
         <p>

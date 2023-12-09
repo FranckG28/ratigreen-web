@@ -5,6 +5,7 @@ import Card from "./Card";
 import Choice from "./Choice";
 import TinderCard from "react-tinder-card";
 import Image from "next/image";
+import Balancer from "react-wrap-balancer";
 
 export interface QuestionProps {
   img: string;
@@ -42,7 +43,25 @@ export default function Question({ img, question, onChoice }: QuestionProps) {
             swipeRequirementType="position"
             swipeThreshold={window.innerWidth * 0.15}
           >
-            <Card img={img} text={question} />
+            <Card className="w-80 py-8">
+              <div className="flex flex-col gap-10 items-center grow justify-center">
+                <Image
+                  style={{
+                    pointerEvents: "none",
+                    userSelect: "none",
+                  }}
+                  src={img}
+                  alt="Question image"
+                  width={200}
+                  height={200}
+                  className="rounded-xl aspect-square object-cover"
+                  priority
+                ></Image>
+                <Balancer className="text-base-content text-lg font-medium text-center select-none p-4">
+                  {question}
+                </Balancer>
+              </div>
+            </Card>
           </TinderCard>
         </div>
         <Choice click={() => onChoice(false)}>
