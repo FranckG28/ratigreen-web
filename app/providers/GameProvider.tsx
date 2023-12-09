@@ -112,7 +112,7 @@ export default function GameProvider({
               ? `Votre planète s'est réchauffée de ${points}°C. Dommage...`
               : `Votre planète s'est refroidie de ${points}°C. Bravo !`}
           </h3>
-          <p className="text-base-cotent">
+          <p className="text-base-content">
             Merci d&apos;avoir joué à Ratigreen !
           </p>
           <button type="button" className="btn btn-primary" onClick={endGame}>

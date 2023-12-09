@@ -15,14 +15,13 @@ export default function Card({ text, img }: CardProps) {
           style={{
             pointerEvents: "none",
             userSelect: "none",
-            width: "50",
-            height: "50",
           }}
           src={img}
           alt="Question image"
           width={200}
           height={200}
-          className="rounded-xl"
+          className="rounded-xl aspect-square object-cover"
+          priority
         ></Image>
         <Balancer className="text-base-content text-lg font-medium text-center select-none p-4">
           {text}

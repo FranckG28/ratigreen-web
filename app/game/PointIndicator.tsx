@@ -22,7 +22,7 @@ const messages: string[] = [
 export default function PointIndicators() {
   const { points } = useContext(GameContext);
 
-  const index = Math.min(points, Object.keys(colors).length - 1);
+  const index = Math.min(Math.floor(points), Object.keys(colors).length - 1);
 
   return (
     <>

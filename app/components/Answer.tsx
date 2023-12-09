@@ -21,14 +21,12 @@ export default function Answer({ img, question, answerUser }: ResultProps) {
           style={{
             pointerEvents: "none",
             userSelect: "none",
-            width: "auto",
-            height: "auto",
           }}
           src={img}
           alt="Hey"
           width={100}
           height={100}
-          className="rounded-xl"
+          className="rounded-xl aspect-square object-cover"
         ></Image>
         <p className="text-base-content text-lg font-bold text-left select-none">
           {question.title}

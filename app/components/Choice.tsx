@@ -13,13 +13,7 @@ export default function Choice({ text, img, click }: ChoiceProps) {
       onClick={click}
       className="flex flex-col gap-4 items-center rounded-lg p-4 transition hover:bg-base-300 cursor-pointer w-28"
     >
-      <Image
-        src={img}
-        alt="Arrow"
-        width={40}
-        height={40}
-        style={{ width: 40, height: 40 }}
-      ></Image>
+      <Image src={img} alt="Arrow" width={40} height={40}></Image>
       <p className="text-center text-base-content">{text}</p>
     </div>
   );
