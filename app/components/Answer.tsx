@@ -5,11 +5,38 @@ import Message from "./Message";
 import Balancer from "react-wrap-balancer";
 import Badge from "./Badge";
 import Card from "./Card";
+import { Data } from "../models/data.model";
 export interface ResultProps {
   img: string;
   answerUser: boolean;
   question: Question;
   nextQuestion: () => void;
+}
+
+function hightlightAnswerValue(data: Data) {
+  const value = String(data.value);
+  const answer = data.answer;
+
+  const index = answer.indexOf(value);
+
+  if (index == -1) {
+    return (
+      <>
+        {answer}
+      </>
+    )
+  } else {
+    const before = answer.slice(0, index) + " ";
+    const after = answer.slice(index + value.length) + " ";
+    return (
+      <>
+        {before}
+        <span className="font-bold text-primary underline">{value}</span>
+        {after}
+      </>
+    );
+  }
+
 }
 
 export default function Answer({ img, question, answerUser }: ResultProps) {
@@ -58,9 +85,9 @@ export default function Answer({ img, question, answerUser }: ResultProps) {
       </div>
       <div className="flex flex-col gap-3">
         <h2 className="font-bold text-lg uppercase opacity-60">Les données</h2>
-        <h3 className="text-4xl font-bold">{question.datas[0].value}</h3>
+        <h3 className="text-4xl font-bold text-primary">{question.datas[0].value}</h3>
         <Balancer className="font-medium text-xl leading-snug">
-          {question.datas[0].answer}
+          {hightlightAnswerValue(question.datas[0])}
         </Balancer>
         <Balancer className="text-base-content font-light">
           {question.datas[0].explanation}
