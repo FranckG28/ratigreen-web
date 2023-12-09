@@ -3,6 +3,7 @@
 import { themes } from "@/themes";
 import { useContext } from "react";
 import { ThemeContext } from "../providers/ThemeProvider";
+import { Theme } from "daisyui";
 
 export default function ThemeChanger() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -10,7 +11,7 @@ export default function ThemeChanger() {
   return (
     <select
       value={theme}
-      onChange={(e) => setTheme(e.target.value)}
+      onChange={(e) => setTheme(e.target.value as Theme)}
       tabIndex={0}
       className="select shadow border-base-300 bg-base-200"
     >
