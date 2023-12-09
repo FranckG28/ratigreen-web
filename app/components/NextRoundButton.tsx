@@ -12,7 +12,12 @@ export default function NextRound({ className }: { className?: string }) {
       <button
         type="button"
         className={classNames(className, "btn btn-primary")}
-        onClick={nextQuestion}
+        onClick={() => {
+          if (typeof window !== "undefined")
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+          nextQuestion();
+        }}
       >
         Tour suivant
       </button>
