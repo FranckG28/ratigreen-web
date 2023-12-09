@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import ProgressBar from "./ProgressBar";
 import { Question } from "../models/question.model";
 import Message from "./Message";
 import Balancer from "react-wrap-balancer";
@@ -12,17 +11,12 @@ export interface ResultProps {
   nextQuestion: () => void;
 }
 
-export default function Answer({
-  img,
-  question,
-  answerUser,
-  nextQuestion,
-}: ResultProps) {
+export default function Answer({ img, question, answerUser }: ResultProps) {
   return (
     <div className="flex flex-col gap-8">
       <h1 className="opacity-60 font-bold text-2xl uppercase">Résultats</h1>
 
-      <div className="flex flex-row gap-6 p-4 bg-base-300 rounded-xl justify-center shadow-xl shadow-primary/10 items-center border border-primary/50">
+      <div className="flex flex-row gap-6 p-4 bg-base-300 rounded-xl justify-start shadow-xl shadow-primary/10 items-center border border-primary/50">
         <Image
           style={{
             pointerEvents: "none",
@@ -49,11 +43,11 @@ export default function Answer({
         <div>
           {answerUser === question.answer ? (
             <Badge className="bg-success text-success-content shadow-xl shadow-success/10">
-              C'est une bonne réponse !
+              C&apos;est une bonne réponse !
             </Badge>
           ) : (
             <Badge className="bg-error text-error-content shadow-xl shadow-error/10">
-              Mauvaise réponse ! C'est{" "}
+              Mauvaise réponse ! C&apos;est{" "}
               <span className="font-bold">
                 {question.answer ? "Vrai" : "Faux"}
               </span>
@@ -61,13 +55,13 @@ export default function Answer({
           )}
         </div>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <h2 className="font-bold text-lg uppercase opacity-60">Les données</h2>
         <h3 className="text-4xl font-bold">{question.datas[0].value}</h3>
-        <Balancer className="font-medium text-lg leading-snug">
+        <Balancer className="font-medium text-xl leading-snug">
           {question.datas[0].answer}
         </Balancer>
-        <Balancer className="text-base-content">
+        <Balancer className="text-base-content font-light">
           {question.datas[0].explanation}
         </Balancer>
       </div>
@@ -94,14 +88,6 @@ export default function Answer({
       )}
 
       <Message question={question} />
-
-      <button
-        type="button"
-        className="btn btn-primary self-end"
-        onClick={nextQuestion}
-      >
-        Tour suivant
-      </button>
     </div>
   );
 }

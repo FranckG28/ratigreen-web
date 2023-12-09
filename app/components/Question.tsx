@@ -35,7 +35,7 @@ export default function Question({ img, question, onChoice }: QuestionProps) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 place-content-center">
       {windowWidth > 768 ? (
         // Render layout for screens larger than 1024px
         <div className="self-center flex flex-row items-center gap-10">
