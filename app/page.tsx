@@ -37,7 +37,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <CallToLogin className="mx-0">
+        <CallToLogin className="mx-0 mt-16">
           <div className="flex gap-2 items-center">
             <Link className="btn btn-secondary" href="/auth/register">
               S&apos;inscrire
