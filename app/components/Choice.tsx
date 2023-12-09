@@ -1,20 +1,17 @@
 import React from "react";
-import Image from "next/image";
 
 export interface ChoiceProps {
-  text: string;
-  img: string;
+  children: React.ReactNode;
   click: () => void;
 }
 
-export default function Choice({ text, img, click }: ChoiceProps) {
+export default function Choice({ children, click }: ChoiceProps) {
   return (
-    <div
+    <button
       onClick={click}
-      className="flex flex-col gap-4 items-center rounded-lg p-4 transition hover:bg-base-300 cursor-pointer w-28"
+      className="btn btn-ghost max-lg:hidden text-base-content"
     >
-      <Image src={img} alt="Arrow" width={40} height={40}></Image>
-      <p className="text-center text-base-content">{text}</p>
-    </div>
+      {children}
+    </button>
   );
 }
