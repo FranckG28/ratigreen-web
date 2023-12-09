@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useContext, createContext } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import React, { useContext, createContext, useState } from "react";
+import { Theme } from "daisyui";
 
 interface ThemeContextInterface {
-  theme: string;
-  setTheme: (theme: string) => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextInterface>({
   theme: "forest",
-  setTheme: () => { },
+  setTheme: () => {},
 });
 
 export default function ThemeController({
@@ -19,7 +19,7 @@ export default function ThemeController({
   children: React.ReactNode;
 }) {
   const contextValue = useContext(ThemeContext);
-  const [theme, setTheme] = useLocalStorage("theme", contextValue.theme);
+  const [theme, setTheme] = useState(contextValue.theme);
 
   return (
     <ThemeContext.Provider

@@ -25,9 +25,9 @@ function normalizeOKLCHArray(oklchArray: number[]) {
   return normalizedArray;
 }
 
-function convertColor(theme: string, which: string) {
+function convertColor(theme: Theme, which: string) {
   var parse = require("color-parse");
-  const parsed_value = parse.default(daisyuiColors[theme as Theme][which]);
+  const parsed_value = parse.default(daisyuiColors[theme][which]);
   if (parsed_value.space == "oklch") {
     return normalizeOKLCHArray(parsed_value.values);
   } else {
