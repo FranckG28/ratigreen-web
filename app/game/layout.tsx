@@ -24,9 +24,9 @@ export default async function Layout({
   return (
     <Container>
       <GameProvider questions={questions}>
-        <div className="grid items-center lg:grid-cols-2 gap-4 flex-1">
+        <div className="grid lg:grid-cols-2 gap-4 flex-1">
           {children}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:fixed lg:right-0 -translate-x-1/3">
             <PointIndicators />
             <Planet />
           </div>

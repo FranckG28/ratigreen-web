@@ -10,7 +10,7 @@ export default function Badge({
   return (
     <p
       className={classNames(
-        "bg-accent text-accent-content px-4 py-2 rounded-full text-center font-bold",
+        "bg-accent text-accent-content text-lg px-8 py-3 rounded-full font-medium inline",
         className
       )}
     >
