@@ -1,11 +1,11 @@
 import Link from "next/link";
-import ThemeChanger from "./components/ThemeChanger";
 import Container from "./components/Container";
 import Ratilogo from "./components/Ratilogo";
 import Balancer from "react-wrap-balancer";
 import CallToLogin from "./components/CallToLogin";
 import { ArrowRight, HelpCircle } from "lucide-react";
 import Planet from "./components/Planet";
+import ThemeReset from "./components/ThemeReset";
 
 export default function Home() {
   return (
@@ -45,6 +45,7 @@ export default function Home() {
         </CallToLogin>
       </div>
       <Planet className="self-center" />
+      <ThemeReset />
     </Container>
   );
 }

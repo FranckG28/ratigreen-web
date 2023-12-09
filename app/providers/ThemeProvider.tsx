@@ -8,8 +8,10 @@ interface ThemeContextInterface {
   setTheme: (theme: Theme) => void;
 }
 
+export const defaultTheme = "forest";
+
 export const ThemeContext = createContext<ThemeContextInterface>({
-  theme: "forest",
+  theme: defaultTheme,
   setTheme: () => {},
 });
 
