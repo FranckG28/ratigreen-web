@@ -8,6 +8,7 @@ import ThemeController from "./providers/ThemeProvider";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import KonamiProvider from "./providers/KonamiProvider";
+import classNames from "classnames";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,7 +52,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body className={classNames(inter.className, "antialiased")}>
         <KonamiProvider>
           <ThemeController>
             <Navbar />

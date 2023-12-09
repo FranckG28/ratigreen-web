@@ -28,13 +28,6 @@ export default function Home() {
               Démarrer
               <ArrowRight className="group-hover:translate-x-1 transition-all" />
             </Link>
-            <a
-              className="btn btn-ghost btn-lg"
-              href="https://youtu.be/HvRMgNuD6kI"
-              target="_blank"
-            >
-              Comment jouer ? <HelpCircle />
-            </a>
           </div>
         </div>
         <CallToLogin className="mx-0 mt-16">
