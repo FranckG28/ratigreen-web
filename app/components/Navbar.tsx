@@ -5,7 +5,7 @@ import UserCard from "./UserCard";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100/50 fixed border-b border-base-200/50 backdrop-blur">
+    <div className="navbar bg-base-100/50 fixed border-b border-base-200/50 backdrop-blur z-40">
       <div className="flex-1">
         <Link className="btn btn-ghost text-xl" href={"/"}>
           <Ratilogo size="sm" />

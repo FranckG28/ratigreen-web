@@ -5,7 +5,8 @@ import Message from "./Message";
 import Balancer from "react-wrap-balancer";
 import Badge from "./Badge";
 import Card from "./Card";
-import { Data } from "../models/data.model";
+import useFormatNumber from "../hooks/useFormatNumber";
+
 export interface ResultProps {
   img: string;
   answerUser: boolean;
@@ -13,18 +14,11 @@ export interface ResultProps {
   nextQuestion: () => void;
 }
 
-function hightlightAnswerValue(data: Data) {
-  const value = String(data.value);
-  const answer = data.answer;
-
+function hightlightAnswerValue(answer: string, value: string) {
   const index = answer.indexOf(value);
 
   if (index == -1) {
-    return (
-      <>
-        {answer}
-      </>
-    )
+    return <>{answer}</>;
   } else {
     const before = answer.slice(0, index) + " ";
     const after = answer.slice(index + value.length) + " ";
@@ -36,10 +30,11 @@ function hightlightAnswerValue(data: Data) {
       </>
     );
   }
-
 }
 
 export default function Answer({ img, question, answerUser }: ResultProps) {
+  const value = useFormatNumber(question.datas[0].value);
+
   return (
     <div className="flex flex-col gap-8">
       <h1 className="opacity-60 font-bold text-2xl uppercase">Résultats</h1>
@@ -83,13 +78,15 @@ export default function Answer({ img, question, answerUser }: ResultProps) {
           )}
         </div>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 relative">
         <h2 className="font-bold text-lg uppercase opacity-60">Les données</h2>
-        <h3 className="text-4xl font-bold text-primary">{question.datas[0].value}</h3>
-        <Balancer className="font-medium text-xl leading-snug">
-          {hightlightAnswerValue(question.datas[0])}
+        <p className="text-6xl font-bold text-transparent top-10 absolute bg-clip-text bg-gradient-to-t from-primary/5 to-primary/80">
+          {value}
+        </p>
+        <Balancer className="font-medium text-xl leading-snug z-10 mt-10">
+          {hightlightAnswerValue(question.datas[0].answer, value)}
         </Balancer>
-        <Balancer className="text-base-content font-light">
+        <Balancer className="text-base-content font-light z-10">
           {question.datas[0].explanation}
         </Balancer>
       </div>
