@@ -8,9 +8,11 @@ import { ArrowRight, HelpCircle } from "lucide-react";
 import Planet from "./components/Planet";
 
 export default function Home() {
-  {/* gap-x needs to updated */ }
+  {
+    /* gap-x needs to updated */
+  }
   return (
-    < Container className="flex-col gap-6 gap-x-48 items-center grid xl:grid-cols-2" >
+    <Container className="flex-col gap-6 gap-x-48 items-center grid xl:grid-cols-2">
       <div className="flex flex-col justify-start gap-3">
         <Ratilogo size="lg" />
 
@@ -38,9 +40,8 @@ export default function Home() {
             </Link>
           </div>
         </CallToLogin>
-        <ThemeChanger />
       </div>
       <Planet />
-    </Container >
+    </Container>
   );
 }
