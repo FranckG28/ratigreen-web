@@ -13,7 +13,7 @@ export default async function Page() {
 
   return (
     <GameProvider questions={questions}>
-      <div className="grid lg:grid-cols-2 gap-8 flex-1">
+      <div className="grid lg:grid-cols-2 gap-8 flex-1 w-full">
         <GamePage />
         <div className="flex flex-col justify-center gap-6 lg:sticky lg:right-0 max-lg:pb-20 lg:self-center">
           <PointIndicators />
