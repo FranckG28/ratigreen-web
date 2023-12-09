@@ -41,7 +41,9 @@ export default function Question({ img, question, onChoice }: QuestionProps) {
             }}
             preventSwipe={["up", "down"]}
             swipeRequirementType="position"
-            swipeThreshold={window ? window.innerWidth * 0.15 : 0}
+            swipeThreshold={
+              typeof window !== "undefined" ? window.innerWidth * 0.15 : 0
+            }
           >
             <Card className="w-80 py-8">
               <div className="flex flex-col gap-10 items-center grow justify-center">
