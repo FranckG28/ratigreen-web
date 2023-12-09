@@ -15,25 +15,29 @@ export default function Home() {
           <Ratilogo size="lg" />
 
           <Balancer className="max-w-prose p-2">
-            Restez <span className="text-success">green</span> avec{" "}
+            Combattez le réchauffement climatique de votre planète en répondant
+            correctement aux questions ! Restez{" "}
+            <span className="text-success">green</span> avec{" "}
             <span className="font-medium">Ratigreen</span> 🐀
           </Balancer>
-          <Link
-            href="/game"
-            className="btn btn-primary btn-lg transition group hover:scale-105"
-          >
-            Démarrer
-            <ArrowRight className="group-hover:translate-x-1 transition-all" />
-          </Link>
-          <a
-            className="btn btn-ghost"
-            href="https://youtu.be/HvRMgNuD6kI"
-            target="_blank"
-          >
-            Comment jouer ? <HelpCircle />
-          </a>
+          <div className="flex gap-2">
+            <Link
+              href="/game"
+              className="btn btn-primary btn-lg transition group hover:scale-105"
+            >
+              Démarrer
+              <ArrowRight className="group-hover:translate-x-1 transition-all" />
+            </Link>
+            <a
+              className="btn btn-ghost btn-lg"
+              href="https://youtu.be/HvRMgNuD6kI"
+              target="_blank"
+            >
+              Comment jouer ? <HelpCircle />
+            </a>
+          </div>
         </div>
-        <CallToLogin>
+        <CallToLogin className="mx-0">
           <div className="flex gap-2 items-center">
             <Link className="btn btn-secondary" href="/auth/register">
               S&apos;inscrire
