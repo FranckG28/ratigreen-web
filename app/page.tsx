@@ -20,7 +20,7 @@ export default function Home() {
             <span className="text-success">green</span> avec{" "}
             <span className="font-medium">Ratigreen</span> 🐀
           </Balancer>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Link
               href="/game"
               className="btn btn-primary btn-lg transition group hover:scale-105"
