@@ -6,5 +6,5 @@ import { GameContext } from "../providers/GameProvider";
 export default function PointIndicators() {
   const { points } = useContext(GameContext);
 
-  return <p className="text-5xl font-bold">{points} °C</p>;
+  return <p className="text-4xl font-bold text-center">{points} °C</p>;
 }

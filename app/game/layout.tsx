@@ -4,6 +4,8 @@ import Container from "../components/Container";
 import GameProvider from "../providers/GameProvider";
 import { Question as QuestionModel } from "../models/question.model";
 import { getQuestions } from "./get-questions.action";
+import PointIndicators from "./PointIndicator";
+import Planet from "../components/Planet";
 
 async function fetchQuestions(): Promise<QuestionModel[]> {
   const questions = await getQuestions();
@@ -21,7 +23,15 @@ export default async function Layout({
 
   return (
     <Container>
-      <GameProvider questions={questions}>{children}</GameProvider>
+      <GameProvider questions={questions}>
+        <div className="grid items-center lg:grid-cols-2 gap-4 flex-1">
+          {children}
+          <div className="flex flex-col gap-6">
+            <PointIndicators />
+            <Planet />
+          </div>
+        </div>
+      </GameProvider>
     </Container>
   );
 }

@@ -11,11 +11,7 @@ export interface QuestionProps {
   onChoice: (answer: boolean) => void;
 }
 
-export default function Question({
-  img,
-  question,
-  onChoice,
-}: QuestionProps) {
+export default function Question({ img, question, onChoice }: QuestionProps) {
   const LEFT_SWIPE = "left";
   const RIGHT_SWIPE = "right";
 
@@ -39,7 +35,7 @@ export default function Question({
   }, []);
 
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-8">
       {windowWidth > 768 ? (
         // Render layout for screens larger than 1024px
         <div className="self-center flex flex-row items-center gap-10">

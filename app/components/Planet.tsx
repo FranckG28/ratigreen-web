@@ -9,6 +9,7 @@ import ratGIF from "@/public/funny-rat-funny.gif";
 import Image from "next/image";
 import { toast } from "@/app/components/Toast";
 import { KonaContext } from "../providers/KonamiProvider";
+import classNames from "classnames";
 
 function normalizeOKLCHArray(oklchArray: number[]) {
   // Define the minimum and maximum values for each component
@@ -38,10 +39,10 @@ function convertColor(theme: string, which: string) {
   }
 }
 
-export default function Planet() {
+export default function Planet({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const width = 700;
-  const height = 700;
+  const width = 400;
+  const height = 400;
 
   const { theme } = useContext(ThemeContext);
   const { konami } = useContext(KonaContext);
@@ -93,7 +94,7 @@ export default function Planet() {
   }, [theme]);
 
   return (
-    <div>
+    <div className={classNames(className, "flex justify-center")}>
       {konami ? (
         <Image
           className="absolute"
