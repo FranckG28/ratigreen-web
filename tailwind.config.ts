@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss'
 import { themes } from './themes'
-import { ratiscrum } from './themes/ratiscrum'
 
 const config: Config = {
   content: [
@@ -19,7 +18,7 @@ const config: Config = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: [...themes, ratiscrum]
+    themes
   }
 }
 export default config
