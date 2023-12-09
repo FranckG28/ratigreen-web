@@ -5,21 +5,18 @@ import { Question as QuestionModel } from "../models/question.model";
 import { ThemeContext } from "./ThemeProvider";
 
 export const GameContext = createContext<{
-  questions: QuestionModel[];
-  actualQuestion: number;
+  question?: QuestionModel;
   points: number;
-  lastAnswer: boolean;
-  setLastAnwser: (lastAnswer: boolean) => void;
-  setPoints: (points: number) => void;
-  setActualQuestion: (actualQuestion: number) => void;
+  lastResult: boolean;
+  showResult: boolean;
+  answer: (answer: boolean) => void;
+  nextQuestion: () => void;
 }>({
-  questions: [],
-  actualQuestion: 0,
   points: 0,
-  lastAnswer: false,
-  setPoints: () => { },
-  setActualQuestion: () => { },
-  setLastAnwser: () => { },
+  lastResult: false,
+  showResult: false,
+  answer: (answer: boolean) => {},
+  nextQuestion: () => {},
 });
 
 export default function GameProvider({
@@ -30,8 +27,9 @@ export default function GameProvider({
   questions: QuestionModel[];
 }) {
   const [points, setPoints] = useState<number>(0);
-  const [actualQuestion, setActualQuestion] = useState<number>(0);
-  const [lastAnswer, setLastAnwser] = useState<boolean>(false);
+  const [questionId, setQuestionId] = useState<number>(0);
+  const [lastResult, setLastResult] = useState<boolean>(false);
+  const [showResult, setShowResult] = useState<boolean>(false);
 
   const { setTheme } = useContext(ThemeContext);
 
@@ -53,16 +51,33 @@ export default function GameProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [points]);
 
+  const answer = (answer: boolean) => {
+    if (answer) {
+      setPoints(points + 1);
+    } else {
+      setPoints(points - 1);
+    }
+
+    setLastResult(answer);
+    setShowResult(true);
+  };
+
+  const nextQuestion = () => {
+    setQuestionId(questionId + 1);
+    setShowResult(false);
+  };
+
+  const question = questions[questionId];
+
   return (
     <GameContext.Provider
       value={{
-        questions,
-        actualQuestion,
+        question,
         points,
-        lastAnswer,
-        setPoints,
-        setActualQuestion,
-        setLastAnwser,
+        lastResult,
+        showResult,
+        answer,
+        nextQuestion,
       }}
     >
       {children}
