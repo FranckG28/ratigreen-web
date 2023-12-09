@@ -55,7 +55,7 @@ export default function RootLayout({
         <KonamiProvider>
           <ThemeController>
             <Navbar />
-            <div className="pb-24 pt-24 min-h-screen flex flex-col">
+            <div className="pb-24 pt-24 min-h-screen flex flex-col select-none">
               {children}
             </div>
             <Footer />
