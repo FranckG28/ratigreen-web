@@ -3,11 +3,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Question as QuestionModel } from "../models/question.model";
 import { ThemeContext } from "./ThemeProvider";
-import Modal from "../components/Modal";
-import classNames from "classnames";
-import { redirect } from "next/navigation";
 import { Theme } from "daisyui";
-import Link from "next/link";
+import GameEnd from "../game/GameEnd";
 
 export const GameContext = createContext<{
   question?: QuestionModel;
@@ -90,27 +87,7 @@ export default function GameProvider({
       }}
     >
       {children}
-      <Modal isOpen={showEndModal}>
-        <div className="flex flex-col gap-4 items-center py-8">
-          <h1 className="text-lg font-bold">Partie terminée</h1>
-          <h3
-            className={classNames(
-              points > 0 ? "text-error" : "text-success",
-              "text-xl text-center font-medium"
-            )}
-          >
-            {points > 0
-              ? `Votre planète s'est réchauffée de ${points}°C. Dommage...`
-              : `Votre planète s'est refroidie de ${points}°C. Bravo !`}
-          </h3>
-          <p className="text-base-content">
-            Merci d&apos;avoir joué à Ratigreen !
-          </p>
-          <Link href="/" className="btn btn-primary">
-            Retour à l&apos;accueil
-          </Link>
-        </div>
-      </Modal>
+      <GameEnd isOpen={showEndModal} points={points} />
     </GameContext.Provider>
   );
 }
