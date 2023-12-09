@@ -6,6 +6,7 @@ import Choice from "./Choice";
 import TinderCard from "react-tinder-card";
 import Image from "next/image";
 import Balancer from "react-wrap-balancer";
+import { MoveLeft, MoveRight } from "lucide-react";
 
 export interface QuestionProps {
   img: string;
@@ -26,12 +27,7 @@ export default function Question({ img, question, onChoice }: QuestionProps) {
     <div className="flex flex-col gap-8 place-content-center">
       <div className="self-center flex flex-row items-center gap-6">
         <Choice click={() => onChoice(true)}>
-          <Image
-            src="/left-arrow.svg"
-            alt="Arrow"
-            width={20}
-            height={20}
-          ></Image>
+          <MoveLeft />
           <p>Vrai</p>
         </Choice>
         <div>
@@ -68,12 +64,7 @@ export default function Question({ img, question, onChoice }: QuestionProps) {
         </div>
         <Choice click={() => onChoice(false)}>
           <p>Faux</p>
-          <Image
-            src="/right-arrow.svg"
-            alt="Arrow"
-            width={20}
-            height={20}
-          ></Image>
+          <MoveRight />
         </Choice>
       </div>
 
