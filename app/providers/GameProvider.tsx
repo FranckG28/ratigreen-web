@@ -7,6 +7,7 @@ import Modal from "../components/Modal";
 import classNames from "classnames";
 import { redirect } from "next/navigation";
 import { Theme } from "daisyui";
+import Link from "next/link";
 
 export const GameContext = createContext<{
   question?: QuestionModel;
@@ -75,16 +76,6 @@ export default function GameProvider({
     setShowResult(false);
   };
 
-  const endGame = () => {
-    setShowEndModal(false);
-    setShowResult(false);
-    setQuestionId(0);
-    setPoints(0);
-    setLastResult(false);
-
-    redirect("/");
-  };
-
   const question = questions[questionId];
 
   return (
@@ -115,9 +106,9 @@ export default function GameProvider({
           <p className="text-base-content">
             Merci d&apos;avoir joué à Ratigreen !
           </p>
-          <button type="button" className="btn btn-primary" onClick={endGame}>
+          <Link href="/" className="btn btn-primary">
             Retour à l&apos;accueil
-          </button>
+          </Link>
         </div>
       </Modal>
     </GameContext.Provider>
