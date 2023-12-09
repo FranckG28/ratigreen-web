@@ -30,7 +30,10 @@ export default function ThemeController({
         setTheme,
       }}
     >
-      <main className={"min-h-screen relative"} data-theme={theme}>
+      <main
+        className={"min-h-screen relative transition-all duration-500"}
+        data-theme={theme}
+      >
         {children}
       </main>
     </ThemeContext.Provider>
